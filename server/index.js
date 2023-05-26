@@ -1,10 +1,7 @@
-const express = require("express");
-const app = express();
+const dotenv = require("dotenv");
 
-app.get("/", () => {
-  return "hello world";
-});
+const connectToDatabase = require("./src/database/connect");
 
-const port = 8080;
+dotenv.config();
 
-app.listen(port, () => console.log(`Rodando com express na porta ${port}!`));
+connectToDatabase();
