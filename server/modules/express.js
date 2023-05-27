@@ -25,6 +25,18 @@ app.post("/tasks", async (req, res) => {
   }
 });
 
+app.patch("/tasks/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const task = await TaskModal.findByIdAndUpdate(id, req.body, { new: true });
+
+    res.status(200).json(task);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 app.delete("/tasks/:id", async (req, res) => {
   try {
     const id = req.params.id;
