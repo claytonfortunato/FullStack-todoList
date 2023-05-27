@@ -5,6 +5,16 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/tasks", async (req, res) => {
+  try {
+    const task = await TaskModal.find({});
+
+    res.status(200).json(task);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+});
+
 app.post("/tasks", async (req, res) => {
   try {
     const task = await TaskModal.create(req.body);
