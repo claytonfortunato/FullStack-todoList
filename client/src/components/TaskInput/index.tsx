@@ -3,8 +3,8 @@ import * as C from "./styles";
 export const TaskInput = () => {
   return (
     <C.Container>
-      <input type="text" />
-      <button>Adicionar Tarefa</button>
+      <C.Input type="text" />
+      <C.ButtonInput>Adicionar</C.ButtonInput>
     </C.Container>
   );
 };
