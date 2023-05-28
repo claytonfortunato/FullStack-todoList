@@ -4,6 +4,7 @@ export const Task = () => {
   return (
     <C.Container>
       <C.Wrapper>
+        <input type="checkbox" />
         <C.Description>Teste1</C.Description>
       </C.Wrapper>
       <C.Content>
