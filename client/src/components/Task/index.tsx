@@ -1,6 +1,8 @@
 import * as C from "./styles";
 
 export const Task = () => {
+  const [isChecked, setIsChecked] = useState();
+
   return (
     <C.Container>
       <C.Wrapper>

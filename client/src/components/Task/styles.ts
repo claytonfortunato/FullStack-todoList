@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface Done {
+  done: boolean;
+}
+
 export const Container = styled.div`
   margin-top: 2rem;
   display: flex;
