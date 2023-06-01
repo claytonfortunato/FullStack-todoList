@@ -1,7 +1,7 @@
 import * as C from "./styles";
 
 export const Task = () => {
-  const [isChecked, setIsChecked] = useState();
+  // const [isChecked, setIsChecked] = useState();
 
   return (
     <C.Container>
