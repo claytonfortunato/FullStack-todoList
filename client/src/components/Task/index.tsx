@@ -1,17 +1,27 @@
+import Check from "../../assets/icons/check.svg";
+import Edit from "../../assets/icons/edit.svg";
+import Delete from "../../assets/icons/delete.svg";
+
 import * as C from "./styles";
 
+// interface TaskProps {
+//   id: number;
+//   name: string;
+//   done: boolean;
+// }
+
 export const Task = () => {
-  // const [isChecked, setIsChecked] = useState();
+  // const [isChecked, setIsChecked] = useState<TaskProps>();
 
   return (
     <C.Container>
       <C.Wrapper>
-        <input type="checkbox" />
         <C.Description>Teste1</C.Description>
       </C.Wrapper>
       <C.Content>
-        <span>Editar</span>
-        <span>Delete</span>
+        <C.IconImage src={Check} />
+        <C.IconImage src={Edit} />
+        <C.IconImage src={Delete} />
       </C.Content>
     </C.Container>
   );

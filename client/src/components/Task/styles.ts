@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
-interface Done {
-  done: boolean;
-}
+// interface Done {
+//   done: boolean;
+// }
+export const IconImage = styled.img`
+  cursor: pointer;
+`;
 
 export const Container = styled.div`
   margin-top: 2rem;
@@ -21,12 +24,11 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div``;
 
-export const Description = styled.span`
+export const Description = styled.label`
   font-size: 16px;
 `;
 
 export const Content = styled.div`
-  span {
-    margin: 0px 10px;
-  }
+  display: flex;
+  gap: 14px;
 `;
