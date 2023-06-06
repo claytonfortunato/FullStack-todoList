@@ -5,6 +5,10 @@ interface ContainerProps {
 }
 export const IconImage = styled.img`
   cursor: pointer;
+  transition: all 0.3s ease-in;
+  &:hover {
+    transform: scale(1.11);
+  }
 `;
 
 export const Container = styled.div`
@@ -16,10 +20,6 @@ export const Container = styled.div`
   padding: 6px;
   border-radius: 12px;
   transition: all 0.3s ease-in;
-
-  &:hover {
-    transform: scale(1.02);
-  }
 `;
 
 export const Wrapper = styled.div``;
