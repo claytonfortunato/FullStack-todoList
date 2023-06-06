@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-// interface Done {
-//   done: boolean;
-// }
+interface ContainerProps {
+  done: boolean;
+}
 export const IconImage = styled.img`
   cursor: pointer;
 `;
@@ -24,8 +24,10 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div``;
 
-export const Description = styled.label`
+export const Description = styled.label<ContainerProps>`
   font-size: 16px;
+  margin-left: 0.6rem;
+  text-decoration: ${(props) => (props.done ? "line-through" : "initial")};
 `;
 
 export const Content = styled.div`
