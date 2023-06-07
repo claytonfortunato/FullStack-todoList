@@ -7,19 +7,17 @@ import Delete from "../../assets/icons/delete.svg";
 import * as C from "./styles";
 
 interface TaskProps {
-  id: number;
-  name: string;
-  done: boolean;
+  item: any;
 }
 
-export const Task = () => {
-  const [isChecked, setIsChecked] = useState();
+export const Task = ({ item }: TaskProps) => {
+  const [isChecked, setIsChecked] = useState<TaskProps>();
 
   return (
     <C.Container>
       <C.Wrapper>
         <C.Description checked={isChecked} done={isChecked}>
-          Teste1
+          {item.name}
         </C.Description>
       </C.Wrapper>
       <C.Content>
