@@ -4,14 +4,16 @@ import * as C from "./styles";
 
 interface Props {
   onEnter: (taskName: string) => void;
+  onClick: (taskName: string) => void;
 }
 
-export const TaskInput = ({ onEnter }: Props) => {
+export const TaskInput = ({ onEnter, onClick }: Props) => {
   const [inputText, setInputText] = useState("");
 
-  const handleAddTask = (e: EventTarget) => {
-    e.addEventListener;
-    setInputText(inputText);
+  const handleAddTask = (e: any) => {
+    e.preventDefault();
+    onClick(inputText);
+    setInputText("");
   };
 
   const handleKeyUp = (e: KeyboardEvent) => {

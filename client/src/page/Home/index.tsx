@@ -30,7 +30,7 @@ export const Home = () => {
     <C.Container>
       <C.Header>Lista de Tarefa</C.Header>
 
-      <TaskInput onEnter={handleAddTask} />
+      <TaskInput onEnter={handleAddTask} onClick={handleAddTask} />
 
       <FilterInput />
 
