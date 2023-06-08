@@ -1,9 +1,25 @@
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
 
 import * as C from "./styles";
 
-export const TaskInput = () => {
+interface Props {
+  onEnter: (taskName: string) => void;
+}
+
+export const TaskInput = ({ onEnter }: Props) => {
   const [inputText, setInputText] = useState("");
+
+  const handleAddTask = (e: EventTarget) => {
+    e.addEventListener;
+    setInputText(inputText);
+  };
+
+  const handleKeyUp = (e: KeyboardEvent) => {
+    if (e.code === "Enter" && inputText !== "") {
+      onEnter(inputText);
+      setInputText("");
+    }
+  };
 
   return (
     <C.Container>
@@ -12,8 +28,9 @@ export const TaskInput = () => {
         placeholder="Adicione uma tarefa"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
+        onKeyUp={handleKeyUp}
       />
-      <C.ButtonInput>Adicionar</C.ButtonInput>
+      <C.ButtonInput onClick={handleAddTask}>Adicionar</C.ButtonInput>
     </C.Container>
   );
 };

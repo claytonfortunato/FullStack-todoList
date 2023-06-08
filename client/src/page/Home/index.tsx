@@ -16,11 +16,21 @@ export const Home = () => {
     { id: 1, name: "Comprar o pão na padaria", done: true },
   ]);
 
+  const handleAddTask = (taskName: string) => {
+    let newList = [...list];
+    newList.push({
+      id: list.length + 1,
+      name: taskName,
+      done: false,
+    });
+    setList(newList);
+  };
+
   return (
     <C.Container>
       <C.Header>Lista de Tarefa</C.Header>
 
-      <TaskInput />
+      <TaskInput onEnter={handleAddTask} />
 
       <FilterInput />
 
