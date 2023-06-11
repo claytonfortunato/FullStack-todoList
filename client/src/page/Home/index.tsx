@@ -1,20 +1,15 @@
 import { useState } from "react";
+
 import { FilterInput } from "../../components/FilterInput";
 import { Task } from "../../components/Task";
 import { TaskInput } from "../../components/TaskInput";
+
+import { Item } from "../../interfaces/Item";
+
 import * as C from "./styles";
 
-interface Item {
-  id: number;
-  name: string;
-  done: boolean;
-}
-
 export const Home = () => {
-  const [list, setList] = useState<Item[]>([
-    { id: 1, name: "Comprar o pão na padaria", done: false },
-    { id: 1, name: "Comprar o pão na padaria", done: true },
-  ]);
+  const [list, setList] = useState<Item[]>([]);
 
   const handleAddTask = (taskName: string) => {
     let newList = [...list];
@@ -26,6 +21,10 @@ export const Home = () => {
     setList(newList);
   };
 
+  const handleDeleteTask = (id: number) => {
+    setList((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
   return (
     <C.Container>
       <C.Header>Lista de Tarefa</C.Header>
@@ -35,7 +34,7 @@ export const Home = () => {
       <FilterInput />
 
       {list.map((item, index) => (
-        <Task key={index} item={item} />
+        <Task key={index} item={item} deleteTask={handleDeleteTask} />
       ))}
     </C.Container>
   );

@@ -8,25 +8,21 @@ import * as C from "./styles";
 
 interface TaskProps {
   item: any;
+  deleteTask: (id: number) => void;
 }
 
-export const Task = ({ item }: TaskProps) => {
-  const [isChecked, setIsChecked] = useState<TaskProps>();
+export const Task = ({ item, deleteTask }: TaskProps) => {
+  const [isChecked, setIsChecked] = useState();
 
   return (
     <C.Container>
       <C.Wrapper>
-        <C.Description checked={isChecked} done={isChecked}>
-          {item.name}
-        </C.Description>
+        <C.Description done={false}>{item.name}</C.Description>
       </C.Wrapper>
       <C.Content>
-        <C.IconImage
-          src={Check}
-          onChange={(e) => setIsChecked(e.target.checked)}
-        />
+        <C.IconImage src={Check} />
         <C.IconImage src={Edit} />
-        <C.IconImage src={Delete} />
+        <C.IconImage src={Delete} onClick={() => deleteTask(item.id)} />
       </C.Content>
     </C.Container>
   );
