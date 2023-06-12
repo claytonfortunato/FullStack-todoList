@@ -17,7 +17,7 @@ export const Home = () => {
     let newList = [...list];
     newList.push({
       id: v4(),
-      name: taskName,
+      title: taskName,
       done: false,
     });
     setList(newList);
@@ -29,7 +29,7 @@ export const Home = () => {
 
   const handleDone = (id: string) => {
     setList(
-      list.map((el) => (el.id === id ? { ...name, done: !name.done } : name))
+      list.map((el) => (el.id === id ? { ...title, done: !title.done } : title))
     );
   };
 
