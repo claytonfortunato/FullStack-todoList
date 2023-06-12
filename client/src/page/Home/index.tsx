@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { v4 } from "uuid";
+
 import { FilterInput } from "../../components/FilterInput";
 import { Task } from "../../components/Task";
 import { TaskInput } from "../../components/TaskInput";
@@ -14,15 +16,21 @@ export const Home = () => {
   const handleAddTask = (taskName: string) => {
     let newList = [...list];
     newList.push({
-      id: list.length + 1,
+      id: v4(),
       name: taskName,
       done: false,
     });
     setList(newList);
   };
 
-  const handleDeleteTask = (id: number) => {
+  const handleDeleteTask = (id: string) => {
     setList((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const handleDone = (id: string) => {
+    setList(
+      list.map((el) => (el.id === id ? { ...name, done: !name.done } : name))
+    );
   };
 
   return (
@@ -33,9 +41,18 @@ export const Home = () => {
 
       <FilterInput />
 
-      {list.map((item, index) => (
-        <Task key={index} item={item} deleteTask={handleDeleteTask} />
-      ))}
+      {list.length > 0 ? (
+        list.map((item, index) => (
+          <Task
+            key={index}
+            item={item}
+            deleteTask={handleDeleteTask}
+            taskDone={handleDone}
+          />
+        ))
+      ) : (
+        <p>Não há tarefas aqui!</p>
+      )}
     </C.Container>
   );
 };
