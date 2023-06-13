@@ -27,7 +27,6 @@ export const Wrapper = styled.div``;
 
 export const Description = styled.p<ContainerProps>`
   font-size: 16px;
-
   text-decoration: ${({ done }) => (done ? "line-through" : "initial")};
 `;
 
@@ -42,7 +41,7 @@ export const Content = styled.div`
 
     &:hover {
       &::before {
-        background-color: #88fa97;
+        background-color: ${(props) => props.theme.colors.green100};
       }
     }
   }
@@ -56,7 +55,7 @@ export const Content = styled.div`
   input:checked {
     & + label::before {
       content: "\\002714";
-      background-color: green;
+      background-color: ${(props) => props.theme.colors.green700};
       display: flex;
       justify-content: center;
       align-items: center;
@@ -66,7 +65,7 @@ export const Content = styled.div`
   input::checked {
     & + label::before {
       content: "\\002714";
-      background-color: green;
+      background-color: ${(props) => props.theme.colors.green700};
     }
   }
 

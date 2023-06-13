@@ -12,6 +12,7 @@ import * as C from "./styles";
 
 export const Home = () => {
   const [list, setList] = useState<Item[]>([]);
+  const [filter, setFilter] = useState<"all" | "toDo" | "complete">("all");
 
   const handleAddTask = (taskName: string) => {
     let newList = [...list];
@@ -27,10 +28,14 @@ export const Home = () => {
     setList((prev) => prev.filter((todo) => todo.id !== id));
   };
 
-  const handleDone = (id: string) => {
-    setList(
-      list.map((el) => (el.id === id ? { ...title, done: !title.done } : title))
-    );
+  const filterAll = (filter: string) => {
+    if (filter === "all") return list;
+    if (filter === "toDo") {
+      return list.filter((todo) => todo.done === false);
+    }
+    if (filter === "complete") {
+      return list.filter((todo) => todo.done === false);
+    }
   };
 
   return (
@@ -42,13 +47,8 @@ export const Home = () => {
       <FilterInput />
 
       {list.length > 0 ? (
-        list.map((item, index) => (
-          <Task
-            key={index}
-            item={item}
-            deleteTask={handleDeleteTask}
-            taskDone={handleDone}
-          />
+        filterAll(filter)?.map((index, item) => (
+          <Task key={index} item={item} deleteTask={handleDeleteTask} />
         ))
       ) : (
         <p>Não há tarefas aqui!</p>
