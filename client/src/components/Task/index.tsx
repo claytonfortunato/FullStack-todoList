@@ -8,30 +8,37 @@ import { Item } from "../../interfaces/Item";
 import * as C from "./styles";
 
 interface TaskProps {
-  item: Item;
-  deleteTask: (id: string) => void;
-  checked: boolean;
+  description: string;
+  done: boolean;
+  id: string;
+  // deleteTask: (id: string) => void;
+  // checked: boolean;
+  handleTodo: (id: string) => void;
 }
 
-export const Task = ({ item, deleteTask }: TaskProps) => {
-  const [isChecked, setIsChecked] = useState(item.done);
+export const Task = ({ id, description, done, handleTodo }: TaskProps) => {
+  const [isChecked, setIsChecked] = useState(done);
+
+  const handleCheck = (e: any) => {
+    handleTodo(id);
+    setIsChecked(e.target.checked);
+  };
+
+  const handleChecked = () => {
+    isChecked;
+    done;
+  };
 
   return (
     <C.Container>
       <C.Wrapper>
-        <C.Description done={isChecked}>{item.title}</C.Description>
+        <C.Description done={isChecked}>{description}</C.Description>
       </C.Wrapper>
       <C.Content>
-        <input
-          type="checkbox"
-          name="check"
-          id="check"
-          checked={isChecked}
-          onChange={(e) => setIsChecked(e.target.checked)}
-        />
+        <input type="checkbox" id={id} checked={done} onChange={handleCheck} />
         <label htmlFor="check"></label>
         <C.IconImage src={Edit} />
-        <C.IconImage src={Delete} onClick={() => deleteTask(item.id)} />
+        <C.IconImage src={Delete} />
       </C.Content>
     </C.Container>
   );
