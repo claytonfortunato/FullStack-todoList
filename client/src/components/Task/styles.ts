@@ -13,8 +13,8 @@ export const IconImage = styled.img<ContainerProps>`
 `;
 
 export const Container = styled.div`
-  margin-top: 2rem;
   display: flex;
+  margin: 10px 6px;
   justify-content: space-between;
   align-items: center;
   background: rgba(255, 255, 255, 0.75);

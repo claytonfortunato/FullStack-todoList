@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  /* background: rgba(255, 255, 255, 0.75);
-  border-radius: 12px;
-  padding: 10px; */
-  width: 100vw;
-  height: 100vh;
+  width: 600px;
   display: flex;
   flex-direction: column;
 
@@ -43,7 +39,24 @@ export const Content = styled.div`
     text-align: center;
     font-size: 1.4rem;
     color: ${(props) => props.theme.colors.red1};
-    background-color: ${(props) => props.theme.colors.grey};
+    background-color: ${(props) => props.theme.colors.white};
     border-radius: 10px;
+    margin: 18px;
+  }
+`;
+
+export const ContentMid = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0px;
+
+  > select {
+    padding: 4px;
+    background-color: #ddd;
+    outline: none;
+    border: none;
+    border-radius: 6px;
   }
 `;

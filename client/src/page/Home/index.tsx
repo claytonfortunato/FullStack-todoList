@@ -59,8 +59,6 @@ export const Home = () => {
       <C.Container>
         <C.Header>Todo List APP</C.Header>
         <C.Wrapper>
-          <TaskInput addTask={handleAddTask} />
-
           <form onSubmit={handleAddTask}>
             <input
               type="text"
@@ -72,37 +70,41 @@ export const Home = () => {
           </form>
         </C.Wrapper>
 
-        <select
-          name="selectTask"
-          value={filter}
-          onChange={(filter) => setFilter(filter.target.value)}
-        >
-          <option value="all">Todos</option>
-          <option value="toDo">Para fazer</option>
-          <option value="complete">Completos</option>
-        </select>
+        <C.ContentMid>
+          <button>Delete All Tasks</button>
+
+          <select
+            name="selectTask"
+            value={filter}
+            onChange={(filter) => setFilter(filter.target.value)}
+          >
+            <option value="all">Todos</option>
+            <option value="toDo">Para fazer</option>
+            <option value="complete">Completos</option>
+          </select>
+        </C.ContentMid>
         <C.Content>
           <C.Header>Lista de Tarefa</C.Header>
 
           {list.length ? (
             filterAll(filter)?.map(({ id, title, done }) => (
-              <div key={id}>
-                <div>
-                  <input
-                    type="checkbox"
-                    id={id}
-                    checked={done}
-                    onChange={() => handleTodo(id)}
-                  />
-                  <label htmlFor={id}>{title}</label>
-                </div>
-              </div>
-              // <Task
-              //   key={id}
-              //   description={title}
-              //   done={done}
-              //   handleTodo={handleTodo}
-              // />
+              // <div key={id}>
+              //   <div>
+              //     <input
+              //       type="checkbox"
+              //       id={id}
+              //       checked={done}
+              //       onChange={() => handleTodo(id)}
+              //     />
+              //     <label htmlFor={id}>{title}</label>
+              //   </div>
+              // </div>
+              <Task
+                key={id}
+                description={title}
+                done={done}
+                handleTodo={handleTodo}
+              />
             ))
           ) : (
             <p>Nenhuma tarefa adicionada</p>
