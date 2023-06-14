@@ -47,15 +47,20 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     cursor: pointer;
     background-color: #8978d6;
+    transition: all 0.3s ease-in;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 `;
 
 export const Content = styled.div`
-  background-color: #ddd;
+  background-color: ${(props) => props.theme.colors.grey};
   max-width: 600px;
   width: 100%;
   border-radius: 6px;
-  border: 1px solid #333;
+  border: 1px solid ${(props) => props.theme.colors.black};
 
   > p {
     text-align: center;

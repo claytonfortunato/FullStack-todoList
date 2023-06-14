@@ -76,7 +76,7 @@ export const Home = () => {
           <select
             name="selectTask"
             value={filter}
-            onChange={(filter) => setFilter(filter.target.value)}
+            onChange={(text) => setFilter(text.target.value)}
           >
             <option value="all">Todos</option>
             <option value="toDo">Para fazer</option>
@@ -88,22 +88,13 @@ export const Home = () => {
 
           {list.length ? (
             filterAll(filter)?.map(({ id, title, done }) => (
-              // <div key={id}>
-              //   <div>
-              //     <input
-              //       type="checkbox"
-              //       id={id}
-              //       checked={done}
-              //       onChange={() => handleTodo(id)}
-              //     />
-              //     <label htmlFor={id}>{title}</label>
-              //   </div>
-              // </div>
               <Task
                 key={id}
+                id={id}
                 description={title}
                 done={done}
                 handleTodo={handleTodo}
+                deleteTask={handleDeleteTask}
               />
             ))
           ) : (

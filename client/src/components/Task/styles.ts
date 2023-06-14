@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import check from "../../assets/icons/check.svg";
 
 interface ContainerProps {
   done?: boolean;
