@@ -27,6 +27,27 @@ export const Wrapper = styled.div`
   margin-bottom: 20px;
   background-color: #ddd;
   border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid ${(props) => props.theme.colors.black};
+
+  input {
+    width: 100%;
+    padding: 4px;
+    outline: none;
+    border: 1px solid ${(props) => props.theme.colors.black};
+    border-radius: 10px;
+  }
+  button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 4px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #8978d6;
+  }
 `;
 
 export const Content = styled.div`
@@ -41,7 +62,8 @@ export const Content = styled.div`
     color: ${(props) => props.theme.colors.red1};
     background-color: ${(props) => props.theme.colors.white};
     border-radius: 10px;
-    margin: 18px;
+    margin: 12px;
+    padding: 6px;
   }
 `;
 

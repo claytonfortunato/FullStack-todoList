@@ -66,7 +66,7 @@ export const Home = () => {
               placeholder="Adicionar tarefa"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <button>Adicionar</button>
+            <button>Adicionar nova tarefa</button>
           </form>
         </C.Wrapper>
 
