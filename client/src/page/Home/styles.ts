@@ -55,6 +55,7 @@ export const Content = styled.div`
   max-width: 600px;
   width: 100%;
   border-radius: 6px;
+  border: 1px solid #333;
 
   > p {
     text-align: center;
@@ -76,9 +77,18 @@ export const ContentMid = styled.div`
 
   > select {
     padding: 4px;
-    background-color: #ddd;
+    background-color: #8978d6;
     outline: none;
     border: none;
     border-radius: 6px;
+  }
+
+  .allDelete {
+    padding: 4px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: #8978d6;
   }
 `;

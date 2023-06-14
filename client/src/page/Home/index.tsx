@@ -71,7 +71,7 @@ export const Home = () => {
         </C.Wrapper>
 
         <C.ContentMid>
-          <button>Delete All Tasks</button>
+          <button className="allDelete">Delete All Tasks</button>
 
           <select
             name="selectTask"
