@@ -8,6 +8,7 @@ import { TaskInput } from "../../components/TaskInput";
 import { Item } from "../../interfaces/Item";
 
 import * as C from "./styles";
+import { FilterTask } from "../../components/FilterTask";
 
 export const Home = () => {
   const [list, setList] = useState<Item[]>([]);
@@ -59,30 +60,14 @@ export const Home = () => {
       <C.Container>
         <C.Header>Todo List APP</C.Header>
         <C.Wrapper>
-          <form onSubmit={handleAddTask}>
-            <input
-              type="text"
-              value={description}
-              placeholder="Adicionar tarefa"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <button>Adicionar nova tarefa</button>
-          </form>
+          <TaskInput
+            addTask={handleAddTask}
+            description={description}
+            inputText={setDescription}
+          />
         </C.Wrapper>
 
-        <C.ContentMid>
-          <button className="allDelete">Delete All Tasks</button>
-
-          <select
-            name="selectTask"
-            value={filter}
-            onChange={(text) => setFilter(text.target.value)}
-          >
-            <option value="all">Todos</option>
-            <option value="toDo">Para fazer</option>
-            <option value="complete">Completos</option>
-          </select>
-        </C.ContentMid>
+        <FilterTask filter={filter} selectFilter={setFilter} />
         <C.Content>
           <C.Header>Lista de Tarefa</C.Header>
 
