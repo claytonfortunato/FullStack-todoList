@@ -3,3 +3,5 @@ export interface Item {
   title: string;
   done: boolean;
 }
+
+export type FilterProps = "all" | "toDo" | "complete";

@@ -14,6 +14,8 @@ export const Home = () => {
   const [list, setList] = useState<Item[]>([]);
   const [description, setDescription] = useState<string>("");
   const [filter, setFilter] = useState<"all" | "toDo" | "complete">("all");
+  const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
+  const [isEditItem, setIsEditItem] = useState(null);
 
   const handleTodo = (id: string) => {
     setList((prev) => {
@@ -27,12 +29,17 @@ export const Home = () => {
     });
   };
 
-  const handleEdit = (e: any) => {
-    e.preventDefault();
+  const editTask = (id: string) => {
+    let newEditItem = list.find((el) => {
+      return el.id === id;
+    });
+    console.log(newEditItem);
 
-    if (description === "") {
-      return alert("Favor add todo valid!");
-    }
+    setToogleSubmit(false);
+
+    setDescription(newEditItem?.title);
+
+    setIsEditItem(id);
   };
 
   const handleRemoveAll = () => {
@@ -42,17 +49,32 @@ export const Home = () => {
   const handleAddTask = (e: FormEvent) => {
     e.preventDefault();
 
-    if (!description) return alert("Favor preencher a descrição!");
+    if (!description) {
+      return alert("Favor preencher a descrição!");
+    } else if (description && !toggleSubmit) {
+      setList(
+        list.map((el) => {
+          if (el.id === isEditItem) {
+            return { ...el, title: description };
+          }
+          return el;
+        })
+      );
+      setToogleSubmit(true);
 
-    setList((prev) => [
-      ...prev,
-      {
-        id: v4(),
-        title: description,
-        done: false,
-      },
-    ]);
+      setDescription("");
 
+      setIsEditItem(null);
+    } else {
+      setList((prev) => [
+        ...prev,
+        {
+          id: v4(),
+          title: description,
+          done: false,
+        },
+      ]);
+    }
     setDescription("");
   };
 
@@ -76,6 +98,7 @@ export const Home = () => {
             addTask={handleAddTask}
             description={description}
             inputText={setDescription}
+            toggle={toggleSubmit}
           />
         </C.Wrapper>
 
@@ -96,7 +119,7 @@ export const Home = () => {
                 done={done}
                 handleTodo={handleTodo}
                 deleteTask={handleDeleteTask}
-                edit={handleEdit}
+                edit={editTask}
               />
             ))
           ) : (

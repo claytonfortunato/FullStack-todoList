@@ -6,9 +6,15 @@ interface PropsInput {
   addTask: (e: FormEvent) => void;
   description: string;
   inputText: (e: string) => void;
+  toggle: boolean;
 }
 
-export const TaskInput = ({ addTask, description, inputText }: PropsInput) => {
+export const TaskInput = ({
+  addTask,
+  description,
+  inputText,
+  toggle,
+}: PropsInput) => {
   return (
     <C.Container onSubmit={addTask}>
       <C.Input
@@ -17,7 +23,11 @@ export const TaskInput = ({ addTask, description, inputText }: PropsInput) => {
         value={description}
         onChange={(e) => inputText(e.target.value)}
       />
-      <C.ButtonInput>Adicionar tarefa</C.ButtonInput>
+      {toggle ? (
+        <C.ButtonInput>Adicionar tarefa</C.ButtonInput>
+      ) : (
+        <C.ButtonInput>Editar tarefa</C.ButtonInput>
+      )}
     </C.Container>
   );
 };
