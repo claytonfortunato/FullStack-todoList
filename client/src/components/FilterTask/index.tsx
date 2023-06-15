@@ -2,7 +2,7 @@ import * as C from "./styles";
 
 interface PropsSelect {
   filter: string;
-  selectFilter: (text: string) => void;
+  selectFilter: (text: any) => void;
 }
 
 export const FilterTask = ({ filter, selectFilter }: PropsSelect) => {
