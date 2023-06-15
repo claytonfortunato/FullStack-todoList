@@ -16,8 +16,9 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.h1`
-  font-size: 3.1rem;
+  font-size: 3.6rem;
   text-align: center;
+  margin-bottom: 3rem;
 `;
 
 export const Wrapper = styled.div`

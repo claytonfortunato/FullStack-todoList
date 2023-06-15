@@ -2,13 +2,20 @@ import * as C from "./styles";
 
 interface PropsSelect {
   filter: string;
+  removeAll: () => void;
   selectFilter: (text: any) => void;
 }
 
-export const FilterTask = ({ filter, selectFilter }: PropsSelect) => {
+export const FilterTask = ({
+  filter,
+  removeAll,
+  selectFilter,
+}: PropsSelect) => {
   return (
     <C.Container>
-      <C.Button className="allDelete">Delete All Tasks</C.Button>
+      <C.Button className="allDelete" onClick={removeAll}>
+        Delete All Tasks
+      </C.Button>
 
       <C.Select
         name="selectTask"

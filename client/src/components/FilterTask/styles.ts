@@ -23,4 +23,5 @@ export const Select = styled.select`
   outline: none;
   border: none;
   border-radius: 6px;
+  cursor: pointer;
 `;

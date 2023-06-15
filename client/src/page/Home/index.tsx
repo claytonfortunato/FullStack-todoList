@@ -17,14 +17,26 @@ export const Home = () => {
 
   const handleTodo = (id: string) => {
     setList((prev) => {
-      const novoValor = prev.map((todo) => {
+      const newValue = prev.map((todo) => {
         if (todo.id === id) {
           return { ...todo, done: !todo.done };
         }
         return todo;
       });
-      return novoValor;
+      return newValue;
     });
+  };
+
+  const handleEdit = (e: any) => {
+    e.preventDefault();
+
+    if (description === "") {
+      return alert("Favor add todo valid!");
+    }
+  };
+
+  const handleRemoveAll = () => {
+    setList([]);
   };
 
   const handleAddTask = (e: FormEvent) => {
@@ -58,7 +70,7 @@ export const Home = () => {
   return (
     <>
       <C.Container>
-        <C.Header>Todo List APP</C.Header>
+        <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
           <TaskInput
             addTask={handleAddTask}
@@ -67,7 +79,11 @@ export const Home = () => {
           />
         </C.Wrapper>
 
-        <FilterTask filter={filter} selectFilter={setFilter} />
+        <FilterTask
+          filter={filter}
+          selectFilter={setFilter}
+          removeAll={handleRemoveAll}
+        />
         <C.Content>
           <C.Header>Lista de Tarefa</C.Header>
 
@@ -80,6 +96,7 @@ export const Home = () => {
                 done={done}
                 handleTodo={handleTodo}
                 deleteTask={handleDeleteTask}
+                edit={handleEdit}
               />
             ))
           ) : (

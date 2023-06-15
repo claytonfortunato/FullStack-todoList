@@ -17,7 +17,7 @@ export const TaskInput = ({ addTask, description, inputText }: PropsInput) => {
         value={description}
         onChange={(e) => inputText(e.target.value)}
       />
-      <C.ButtonInput>Adicionar</C.ButtonInput>
+      <C.ButtonInput>Adicionar tarefa</C.ButtonInput>
     </C.Container>
   );
 };
