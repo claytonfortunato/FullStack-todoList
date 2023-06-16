@@ -1,5 +1,5 @@
 import * as C from "./styles";
 
-export const Login = () => {
+export const Register = () => {
   return <C.Container></C.Container>;
 };

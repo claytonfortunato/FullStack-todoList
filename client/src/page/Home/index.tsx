@@ -4,6 +4,7 @@ import { v4 } from "uuid";
 
 import { Task } from "../../components/Task";
 import { TaskInput } from "../../components/TaskInput";
+import { Login } from "../Login";
 
 import { Item } from "../../interfaces/Item";
 
@@ -125,6 +126,8 @@ export const Home = () => {
             <p>Nenhuma tarefa adicionada</p>
           )}
         </C.Content>
+
+        <Login />
       </C.Container>
     </>
   );
