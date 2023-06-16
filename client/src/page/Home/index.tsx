@@ -33,7 +33,6 @@ export const Home = () => {
     let newEditItem = list.find((el) => {
       return el.id === id;
     });
-    console.log(newEditItem);
 
     setToogleSubmit(false);
 
