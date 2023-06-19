@@ -4,13 +4,17 @@ export const LoginInput = () => {
   return (
     <C.Container>
       <C.Content>
-        <C.Label htmlFor="email">Email</C.Label>
-        <C.Input type="text" placeholder="Digite seu Email" />
+        <C.Label>
+          Email
+          <C.Input type="text" placeholder="Digite seu Email" />
+        </C.Label>
       </C.Content>
 
       <C.Content>
-        <C.Label htmlFor="password">Senha</C.Label>
-        <C.Input type="text" placeholder="Digite sua senha" />
+        <C.Label>
+          Senha
+          <C.Input type="text" placeholder="Digite sua senha" />
+        </C.Label>
       </C.Content>
 
       <C.Button>Log in</C.Button>

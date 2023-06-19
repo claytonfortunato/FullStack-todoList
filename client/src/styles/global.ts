@@ -18,6 +18,6 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #A9C8D6;
+        background: #B6D6D6;
     }
 `;

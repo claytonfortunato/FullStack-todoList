@@ -7,12 +7,13 @@ export const Container = styled.div`
 export const Header = styled.h1`
   text-align: center;
   font-size: 3.2rem;
+  font-weight: 500;
 `;
 
 export const ContainerForm = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.white};
   border: 1px solid ${(props) => props.theme.colors.black};
   padding: 10px;
   border-radius: 10px;
@@ -24,6 +25,11 @@ export const Input = styled.input`
   border-radius: 8px;
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.black};
+
+  &:focus-within,
+  :hover {
+    border: 1px solid ${(props) => props.theme.colors.purple};
+  }
 `;
 
 export const Label = styled.label`
