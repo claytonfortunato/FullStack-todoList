@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 import { LoginInput } from "../../components/LoginInput";
+
 import * as C from "./styles";
 
 export const Login = () => {
@@ -6,9 +9,10 @@ export const Login = () => {
     <C.Container>
       <C.Header>ToDo List</C.Header>
       <LoginInput />
-      <p>
-        Você não tem conta? <a href="#">Sign up</a>
-      </p>
+      <C.Action>
+        <p>Você não possui conta?</p>
+        <Link to="/register">Sign up</Link>
+      </C.Action>
     </C.Container>
   );
 };

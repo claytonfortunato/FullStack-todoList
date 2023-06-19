@@ -7,6 +7,7 @@ export const Container = styled.form`
   width: 400px;
   padding: 10px;
   border-radius: 10px;
+  border: 1px solid #333;
 
   input {
     width: 100%;
@@ -28,6 +29,10 @@ export const Container = styled.form`
 export const Content = styled.div`
   margin: 10px 0px;
 `;
+
+export const Label = styled.label``;
+
+export const Input = styled.input``;
 
 export const Button = styled.button`
   background-color: ${(props) => props.theme.colors.purple};
