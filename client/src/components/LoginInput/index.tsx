@@ -3,13 +3,17 @@ import * as C from "./styles";
 export const LoginInput = () => {
   return (
     <C.Container>
-      <label htmlFor="login">login</label>
-      <input type="text" />
+      <C.Content>
+        <label htmlFor="email">Email</label>
+        <input type="text" placeholder="Digite seu Email" />
+      </C.Content>
 
-      <label htmlFor="">Password</label>
-      <input type="text" />
+      <C.Content>
+        <label htmlFor="password">Senha</label>
+        <input type="text" placeholder="Digite sua senha" />
+      </C.Content>
 
-      <button>Log In</button>
+      <C.Button>Log in</C.Button>
     </C.Container>
   );
 };
