@@ -4,14 +4,14 @@ import { v4 } from "uuid";
 
 import { Task } from "../../components/Task";
 import { TaskInput } from "../../components/TaskInput";
-import { Login } from "../Login";
+import { FilterTask } from "../../components/FilterTask";
+import { Logout } from "../../components/Logout";
 
 import { Item } from "../../interfaces/Item";
 
 import * as C from "./styles";
-import { FilterTask } from "../../components/FilterTask";
 
-export const Home = () => {
+export const TodoList = () => {
   const [list, setList] = useState<Item[]>([]);
   const [description, setDescription] = useState<string>("");
   const [filter, setFilter] = useState<"all" | "toDo" | "complete">("all");
@@ -91,6 +91,7 @@ export const Home = () => {
 
   return (
     <>
+      <Logout />
       <C.Container>
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
@@ -126,8 +127,6 @@ export const Home = () => {
             <p>Nenhuma tarefa adicionada</p>
           )}
         </C.Content>
-
-        <Login />
       </C.Container>
     </>
   );

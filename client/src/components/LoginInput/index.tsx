@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import * as C from "./styles";
 
 export const LoginInput = () => {
@@ -17,7 +19,9 @@ export const LoginInput = () => {
         </C.Label>
       </C.Content>
 
-      <C.Button>Log in</C.Button>
+      <Link to="/todo">
+        <C.Button>Log in</C.Button>
+      </Link>
     </C.Container>
   );
 };

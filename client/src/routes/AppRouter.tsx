@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Login } from "../page/Login";
-import { Home } from "../page/Home";
+import { TodoList } from "../page/TodoList";
 import { Register } from "../page/Register";
 
 export const AppRouter = () => {
@@ -11,7 +11,7 @@ export const AppRouter = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/todo" element={<TodoList />} />
       </Routes>
     </BrowserRouter>
   );

@@ -4,10 +4,6 @@ export const Container = styled.div`
   width: 600px;
   display: flex;
   flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
   > nav {
     font-size: 16px;
     display: flex;
@@ -48,10 +44,11 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     cursor: pointer;
     background-color: #8978d6;
-    transition: all 0.3s ease-in;
+    color: ${(props) => props.theme.colors.black};
 
     &:hover {
-      opacity: 0.8;
+      background-color: ${(props) => props.theme.colors.purple02};
+      color: black;
     }
   }
 `;
@@ -71,10 +68,5 @@ export const Content = styled.div`
     border-radius: 10px;
     margin: 12px;
     padding: 6px;
-  }
-`;
-
-export const ContentMid = styled.div`
-  > select {
   }
 `;

@@ -13,6 +13,11 @@ export const Input = styled.input`
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.black};
   border-radius: 10px;
+
+  &:focus-within,
+  :hover {
+    border: 1px solid ${(props) => props.theme.colors.purple};
+  }
 `;
 
 export const ButtonInput = styled.button`
