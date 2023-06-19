@@ -36,6 +36,7 @@ export const Input = styled.input``;
 
 export const Button = styled.button`
   background-color: ${(props) => props.theme.colors.purple};
+  color: ${(props) => props.theme.colors.white};
   border: none;
   padding: 6px;
   border-radius: 8px;
