@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import * as C from "./styles";
 
 export const LoginInput = () => {
@@ -15,13 +13,11 @@ export const LoginInput = () => {
       <C.Content>
         <C.Label>
           Senha
-          <C.Input type="text" placeholder="Digite sua senha" />
+          <C.Input type="password" placeholder="Digite sua senha" />
         </C.Label>
       </C.Content>
 
-      <Link to="/todo">
-        <C.Button>Log in</C.Button>
-      </Link>
+      <C.Button>Log in</C.Button>
     </C.Container>
   );
 };
