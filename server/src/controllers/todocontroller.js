@@ -1,5 +1,5 @@
 const express = require("express");
-const TaskModal = require("../src/models/task");
+const TaskModal = require("../models/todomod");
 
 const app = express();
 
