@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const mogoose = require("mongoose");
+const userRoute = require("./src/routes/users/usersRoute");
 
 const app = express();
 const routes = require("./src/routes/ToDoRoute");
@@ -11,6 +11,7 @@ const connectToDB = require("./src/config/db");
 app.use(express.json());
 
 //All other Routes
+app.use("/api/user", userRoute);
 app.use(routes);
 
 app.listen(8000, () => {

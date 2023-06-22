@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-const taskLogin = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -11,6 +15,6 @@ const taskLogin = new mongoose.Schema({
   },
 });
 
-const userModel = mongoose.model("user", taskLogin);
+const User = mongoose.model("user", userSchema);
 
-module.exports = userModel;
+module.exports = User;

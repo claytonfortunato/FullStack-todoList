@@ -1,16 +1,14 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const router = require("express").Router();
+const User = require("../../models/usermod");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-const userModel = require("../../models/usermod");
-
-const app = express();
-
-app.post("/user", async (req, res) => {
+router.post("/users", async (req, res) => {
   const { name, email, password } = req.body;
 
   const newPassword = await bcrypt.hash(password, 8);
 
-  const user = userModel.create({
+  const user = User.create({
     name,
     email,
     password: newPassword,
@@ -19,10 +17,10 @@ app.post("/user", async (req, res) => {
   return res.status(200).json(user);
 });
 
-app.post("/login", async (req, res) => {
+router.post("/users", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email });
+  const user = await User.findOne({ email });
 
   if (!user) res.status(404).json({ message: "User not found" });
 
@@ -37,3 +35,5 @@ app.post("/login", async (req, res) => {
   }
   return res.status(403).json({ message: "User or password invalid!" });
 });
+
+module.exports = router;

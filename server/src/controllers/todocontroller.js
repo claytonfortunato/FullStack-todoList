@@ -1,9 +1,4 @@
-// const express = require("express");
 const TaskModal = require("../models/todomod");
-
-// const app = express();
-
-// app.use(express.json());
 
 module.exports.getToDo = async (req, res) => {
   try {
@@ -21,11 +16,13 @@ module.exports.createToDo = async (req, res) => {
     const task = await TaskModal.create(req.body);
 
     res.status(201).json(task);
+    console.log("Created Sucessfully!");
   } catch (error) {
     res.status(500).send(error.message);
   }
 };
 
+//Update
 module.exports.updateToDo = async (req, res) => {
   try {
     const id = req.params.id;
@@ -38,6 +35,7 @@ module.exports.updateToDo = async (req, res) => {
   }
 };
 
+//Delete
 module.exports.deleteToDo = async (req, res) => {
   try {
     const id = req.params.id;

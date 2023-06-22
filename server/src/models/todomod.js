@@ -8,6 +8,6 @@ const taskSchema = new mongoose.Schema({
   done: { Boolean },
 });
 
-const TaskModal = mongoose.model("task", taskSchema);
+const Task = mongoose.model("task", taskSchema);
 
-module.exports = TaskModal;
+module.exports = Task;

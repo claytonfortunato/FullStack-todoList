@@ -2,7 +2,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/global";
 import { defaultTheme } from "./styles/themes/default";
 
-import { AppRouter } from "./routes/appRouter";
+import { AppRouter } from "./routes/AppRouter";
 
 const App = () => {
   return (
