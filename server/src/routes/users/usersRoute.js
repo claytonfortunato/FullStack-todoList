@@ -1,15 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
 const userModel = require("../../models/usermod");
 
 const app = express();
-
-const port = 8000;
-
-app.use(express.json());
 
 app.post("/user", async (req, res) => {
   const { name, email, password } = req.body;
@@ -42,8 +36,4 @@ app.post("/login", async (req, res) => {
     return res.status(200).json({ ...user.toJSON(), token });
   }
   return res.status(403).json({ message: "User or password invalid!" });
-});
-
-app.listen(port, async () => {
-  console.log("Example app listening on port 8000!");
 });

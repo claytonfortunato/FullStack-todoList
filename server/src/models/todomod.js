@@ -5,6 +5,7 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  done: { Boolean },
 });
 
 const TaskModal = mongoose.model("task", taskSchema);

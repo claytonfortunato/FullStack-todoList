@@ -1,11 +1,11 @@
-const express = require("express");
+// const express = require("express");
 const TaskModal = require("../models/todomod");
 
-const app = express();
+// const app = express();
 
-app.use(express.json());
+// app.use(express.json());
 
-app.get("/tasks", async (req, res) => {
+module.exports.getToDo = async (req, res) => {
   try {
     const task = await TaskModal.find({});
 
@@ -13,9 +13,10 @@ app.get("/tasks", async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-});
+};
 
-app.post("/tasks", async (req, res) => {
+// Create
+module.exports.createToDo = async (req, res) => {
   try {
     const task = await TaskModal.create(req.body);
 
@@ -23,9 +24,9 @@ app.post("/tasks", async (req, res) => {
   } catch (error) {
     res.status(500).send(error.message);
   }
-});
+};
 
-app.patch("/tasks/:id", async (req, res) => {
+module.exports.updateToDo = async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -35,9 +36,9 @@ app.patch("/tasks/:id", async (req, res) => {
   } catch (error) {
     res.status(500).send(error.message);
   }
-});
+};
 
-app.delete("/tasks/:id", async (req, res) => {
+module.exports.deleteToDo = async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -47,8 +48,4 @@ app.delete("/tasks/:id", async (req, res) => {
   } catch (error) {
     res.status(500).send(error.message);
   }
-});
-
-const port = 8000;
-
-app.listen(port, () => console.log(`Rodando com Express na porta ${port}!`));
+};
