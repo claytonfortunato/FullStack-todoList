@@ -7,9 +7,9 @@ const {
 } = require("../controllers/todocontroller");
 const router = express.Router();
 
-router.get("/tasks", getToDo);
-router.post("/tasks", createToDo);
-router.patch("/tasks/:id", updateToDo);
-router.delete("/tasks/:id", deleteToDo);
+router.post("/create", createToDo);
+router.put("/:id", updateToDo);
+router.get("/", getToDo);
+router.delete("/:id", deleteToDo);
 
 module.exports = router;
