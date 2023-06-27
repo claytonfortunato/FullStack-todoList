@@ -29,10 +29,6 @@ export const LoginInput = () => {
     },
   });
 
-  const handleChange = ({ currentTarget: input }: any) => {
-    setData({ ...data, [input.name]: input.value });
-  };
-
   const handleLogin = () => {
     loginForm.reset();
   };
@@ -43,11 +39,7 @@ export const LoginInput = () => {
         <C.Content>
           <C.Label>
             Email
-            <C.Input
-              type="text"
-              placeholder="Digite seu Email"
-              onChange={handleChange}
-            />
+            <C.Input type="text" placeholder="Digite seu Email" />
           </C.Label>
           {loginForm.formState.errors.email?.message}
         </C.Content>
@@ -55,11 +47,7 @@ export const LoginInput = () => {
         <C.Content>
           <C.Label>
             Senha
-            <C.Input
-              type="password"
-              placeholder="Digite sua senha"
-              onChange={handleChange}
-            />
+            <C.Input type="password" placeholder="Digite sua senha" />
           </C.Label>
           {loginForm.formState.errors.password?.message}
         </C.Content>
