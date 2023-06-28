@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useApi } from "../hooks/useApi";
-import { User } from "../interfaces/Item";
+import { useApi } from "../../hooks/useApi";
+import { User } from "../../interfaces/Item";
 import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
