@@ -7,8 +7,6 @@ import { TaskInput } from "../../components/TaskInput";
 import { FilterTask } from "../../components/FilterTask";
 import { Logout } from "../../components/Logout";
 
-import { addTodo } from "../../components/utils/HandleApi";
-
 import { Item } from "../../interfaces/Item";
 
 import * as C from "./styles";
@@ -51,35 +49,33 @@ export const TodoList = () => {
   const handleAddTask = (e: FormEvent) => {
     e.preventDefault();
 
-    // if (!description) {
-    //   return alert("Favor preencher a descrição!");
-    // } else if (description && !toggleSubmit) {
-    //   setList(
-    //     list.map((el) => {
-    //       if (el.id === isEditItem) {
-    //         return { ...el, title: description };
-    //       }
-    //       return el;
-    //     })
-    //   );
-    //   setToogleSubmit(true);
+    if (!description) {
+      return alert("Favor preencher a descrição!");
+    } else if (description && !toggleSubmit) {
+      setList(
+        list.map((el) => {
+          if (el.id === isEditItem) {
+            return { ...el, title: description };
+          }
+          return el;
+        })
+      );
+      setToogleSubmit(true);
 
-    //   setDescription("");
+      setDescription("");
 
-    //   setIsEditItem(null);
-    // } else {
-    //   setList((prev) => [
-    //     ...prev,
-    //     {
-    //       id: v4(),
-    //       title: description,
-    //       done: false,
-    //     },
-    //   ]);
-    // }
-    // setDescription("");
-    setList([]);
-    addTodo(description);
+      setIsEditItem(null);
+    } else {
+      setList((prev) => [
+        ...prev,
+        {
+          id: v4(),
+          title: description,
+          done: false,
+        },
+      ]);
+    }
+    setDescription("");
   };
 
   const handleDeleteTask = (id: string) => {

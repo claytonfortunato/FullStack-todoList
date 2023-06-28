@@ -4,4 +4,11 @@ export interface Item {
   done: boolean;
 }
 
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  password?: string;
+}
+
 export type FilterProps = "all" | "toDo" | "complete";
