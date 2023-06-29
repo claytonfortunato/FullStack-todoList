@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 
 import { v4 } from "uuid";
 
@@ -10,6 +10,7 @@ import { Logout } from "../../components/Logout";
 import { Item } from "../../interfaces/Item";
 
 import * as C from "./styles";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 export const TodoList = () => {
   const [list, setList] = useState<Item[]>([]);
@@ -17,6 +18,8 @@ export const TodoList = () => {
   const [filter, setFilter] = useState<"all" | "toDo" | "complete">("all");
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
+
+  const auth = useContext(AuthContext);
 
   const handleTodo = (id: string) => {
     setList((prev) => {
@@ -91,7 +94,7 @@ export const TodoList = () => {
 
   return (
     <>
-      <Logout />
+      {auth.user && <Logout />}
       <C.Container>
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>

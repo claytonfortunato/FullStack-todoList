@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
+
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
 import * as C from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const loginFormValidationSchema = zod.object({
   email: zod
@@ -18,8 +21,11 @@ const loginFormValidationSchema = zod.object({
 type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
 
 export const LoginInput = () => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginFormValidationSchema),
@@ -29,27 +35,48 @@ export const LoginInput = () => {
     },
   });
 
-  const handleLogin = () => {
-    loginForm.reset();
+  const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = async () => {
+    if (email && password) {
+      const isLogged = await auth.signin(email, password);
+      if (isLogged) {
+        navigate("/todo");
+      } else {
+        alert("Não foi possui logar!");
+      }
+    }
   };
 
   return (
     <FormProvider {...loginForm}>
-      <C.Container noValidate onSubmit={loginForm.handleSubmit(handleLogin)}>
+      <C.Container noValidate onSubmit={handleLogin}>
         <C.Content>
           <C.Label>
             Email
-            <C.Input type="text" placeholder="Digite seu Email" />
+            <C.Input
+              type="text"
+              placeholder="Digite seu Email"
+              onChange={handleEmailInput}
+            />
           </C.Label>
-          {loginForm.formState.errors.email?.message}
         </C.Content>
 
         <C.Content>
           <C.Label>
             Senha
-            <C.Input type="password" placeholder="Digite sua senha" />
+            <C.Input
+              type="password"
+              placeholder="Digite sua senha"
+              onChange={handlePasswordInput}
+            />
           </C.Label>
-          {loginForm.formState.errors.password?.message}
         </C.Content>
 
         <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>
