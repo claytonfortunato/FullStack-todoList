@@ -1,20 +1,19 @@
 require("dotenv").config();
 const express = require("express");
-const userRoute = require("./src/routes/users/usersRoute");
+const cors = require("cors");
 
-const app = express();
 const routes = require("./src/routes/ToDoRoute");
 const connectToDB = require("./src/config/db");
-
-// require("./src/controllers/todocontroller");
+const app = express();
 
 app.use(express.json());
 
 //All other Routes
-app.use("/api/user", userRoute);
+app.use("/", require("./src/routes/users/authRoutes"));
 app.use(routes);
 
-app.listen(8000, () => {
-  console.log("Listening on port : 8000");
+const port = 8000;
+app.listen(port, () => {
+  console.log(`Listening on port : ${port}`);
   connectToDB();
 });
