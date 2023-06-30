@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 //All other Routes
-app.use("/", require("./src/routes/users/authRoutes"));
+app.use("/", require("./src/routes/authRoutes"));
 app.use(routes);
 
 const port = 8000;

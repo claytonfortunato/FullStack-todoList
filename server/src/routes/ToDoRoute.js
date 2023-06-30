@@ -7,7 +7,7 @@ const {
 } = require("../controllers/todocontroller");
 const router = express.Router();
 
-router.post("/users", require("./users/usersRoute"));
+router.post("/users", require("./authRoutes"));
 
 router.post("/todos", createToDo);
 router.put("/todos/:id", updateToDo);
