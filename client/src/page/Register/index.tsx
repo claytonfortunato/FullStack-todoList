@@ -1,38 +1,78 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+
+import { Link, useNavigate } from "react-router-dom";
 
 import * as C from "./styles";
 
+type RegisterProps = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 export const Register = () => {
-  const [data, setData] = useState({
+  const navigate = useNavigate();
+
+  const [data, setData] = useState<RegisterProps>({
     name: "",
     email: "",
     password: "",
   });
 
-  const registerUser = (e: any) => {
+  const registerUser = async (e: any) => {
     e.preventDefault();
     const { name, email, password } = data;
+    try {
+      const { data } = await axios.post("/register", {
+        name,
+        email,
+        password,
+      });
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setData({});
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <C.Container>
+    <C.Container onSubmit={registerUser}>
       <C.Header>Register Account</C.Header>
 
       <C.ContainerForm>
         <C.Label>
           Name
-          <C.Input type="text" placeholder="Digite seu nome" />
+          <C.Input
+            type="text"
+            placeholder="Digite seu nome"
+            value={data.name}
+            onChange={(e) => setData({ ...data, name: e.target.value })}
+          />
         </C.Label>
 
         <C.Label>
           Email
-          <C.Input type="text" placeholder="Digite o seu email" />
+          <C.Input
+            type="text"
+            placeholder="Digite o seu email"
+            value={data.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
+          />
         </C.Label>
 
         <C.Label>
           Password
-          <C.Input type="text" placeholder="Digite sua senha" />
+          <C.Input
+            type="text"
+            placeholder="Digite sua senha"
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+          />
         </C.Label>
 
         <C.Label>
