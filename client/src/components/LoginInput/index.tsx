@@ -43,16 +43,7 @@ export const LoginInput = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = async () => {
-    if (email && password) {
-      const isLogged = await auth.signin(email, password);
-      if (isLogged) {
-        navigate("/todo");
-      } else {
-        alert("Não foi possui logar!");
-      }
-    }
-  };
+  const handleLogin = async () => {};
 
   return (
     <FormProvider {...loginForm}>

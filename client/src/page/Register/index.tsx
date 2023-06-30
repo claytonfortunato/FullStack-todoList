@@ -1,8 +1,20 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import * as C from "./styles";
 
 export const Register = () => {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const registerUser = (e: any) => {
+    e.preventDefault();
+    const { name, email, password } = data;
+  };
+
   return (
     <C.Container>
       <C.Header>Register Account</C.Header>

@@ -9,8 +9,9 @@ import { Logout } from "../../components/Logout";
 
 import { Item } from "../../interfaces/Item";
 
-import * as C from "./styles";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
+
+import * as C from "./styles";
 
 export const TodoList = () => {
   const [list, setList] = useState<Item[]>([]);
@@ -94,7 +95,6 @@ export const TodoList = () => {
 
   return (
     <>
-      {auth.user && <Logout />}
       <C.Container>
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
