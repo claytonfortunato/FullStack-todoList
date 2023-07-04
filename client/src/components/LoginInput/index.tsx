@@ -1,18 +1,20 @@
 import { useContext, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useForm, FormProvider } from "react-hook-form";
 
 import { UserContext } from "../../contexts/Auth/AuthProvider";
+import { toast } from "react-hot-toast";
 
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, FormProvider } from "react-hook-form";
 
 import * as C from "./styles";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   email: string;
   password: string;
+  error?: string;
 }
 
 const loginFormValidationSchema = zod.object({
@@ -53,8 +55,11 @@ export const LoginInput = () => {
         email,
         password,
       });
-      if (data) {
+      if (data.error) {
+        toast.error(data.error);
+      } else {
         setData({});
+        toast.success("Login successfull!");
         navigate("/todo");
       }
     } catch (error) {}
