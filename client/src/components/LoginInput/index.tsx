@@ -1,4 +1,5 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
+import axios from "axios";
 
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 
@@ -8,6 +9,11 @@ import { useForm, FormProvider } from "react-hook-form";
 
 import * as C from "./styles";
 import { useNavigate } from "react-router-dom";
+
+interface Props {
+  email: string;
+  password: string;
+}
 
 const loginFormValidationSchema = zod.object({
   email: zod
@@ -21,8 +27,10 @@ const loginFormValidationSchema = zod.object({
 type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
 
 export const LoginInput = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState<Props>({
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -35,15 +43,24 @@ export const LoginInput = () => {
     },
   });
 
-  const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
 
-  const handlePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+    const { email, password } = data;
 
-  const handleLogin = async () => {};
+    try {
+      await axios.post("/login", {
+        email,
+        password,
+      });
+      if (data) {
+        setData({});
+        navigate("/todo");
+      }
+    } catch (error) {}
+
+    axios.get("/");
+  };
 
   return (
     <FormProvider {...loginForm}>
@@ -54,7 +71,8 @@ export const LoginInput = () => {
             <C.Input
               type="text"
               placeholder="Digite seu Email"
-              onChange={handleEmailInput}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+              value={data.email}
             />
           </C.Label>
         </C.Content>
@@ -65,7 +83,8 @@ export const LoginInput = () => {
             <C.Input
               type="password"
               placeholder="Digite sua senha"
-              onChange={handlePasswordInput}
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
             />
           </C.Label>
         </C.Content>
