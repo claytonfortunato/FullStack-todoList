@@ -1,5 +1,6 @@
 const User = require("../models/usermod");
 const { hashPassword, comparePassword } = require("../helpers/auth");
+const jwt = require("jsonwebtoken");
 
 const user = (req, res) => {
   res.json("teste is working");
@@ -57,7 +58,15 @@ const loginUser = async (req, res) => {
     // Check password
     const match = await comparePassword(password, user.password);
     if (match) {
-      res.json("passswords match");
+      jwt.sign(
+        { email: user.email, id: user._id, name: user.name },
+        process.env.JWT_SECRET,
+        {},
+        (err, token) => {
+          if (err) throw err;
+          res.cookie("token", token).json(user);
+        }
+      );
 
       if (!match) {
         res.json({
@@ -70,4 +79,16 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { user, registerUser, loginUser };
+const getTodo = (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+      if (err) throw err;
+      res.json(user);
+    });
+  } else {
+    res.json(null);
+  }
+};
+
+module.exports = { user, registerUser, loginUser, getTodo };

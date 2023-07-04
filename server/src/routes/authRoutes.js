@@ -5,18 +5,20 @@ const {
   user,
   registerUser,
   loginUser,
+  getTodo,
 } = require("../controllers/authController");
 
 //middleware
 router.use(
   cors({
     credentials: true,
-    origin: "http://localhost:8000",
+    origin: "http://localhost:5173",
   })
 );
 
-router.get("/", user);
+router.get("/user", user);
 router.post("/register", registerUser);
 router.post("/login", loginUser);
+router.get("/todo", getTodo);
 
 module.exports = router;
