@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 import * as C from "./styles";
 
@@ -30,10 +30,11 @@ export const Register = () => {
         password,
       });
       if (data.error) {
-        console.log(data.error);
+        toast.error(data.error);
       } else {
         setData({});
-        navigate("/");
+        toast.success("Login Successful. Welcome!");
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
@@ -41,10 +42,10 @@ export const Register = () => {
   };
 
   return (
-    <C.Container onSubmit={registerUser}>
+    <C.Container>
       <C.Header>Register Account</C.Header>
 
-      <C.ContainerForm>
+      <C.ContainerForm onSubmit={registerUser}>
         <C.Label>
           Name
           <C.Input
@@ -68,7 +69,7 @@ export const Register = () => {
         <C.Label>
           Password
           <C.Input
-            type="text"
+            type="password"
             placeholder="Digite sua senha"
             value={data.password}
             onChange={(e) => setData({ ...data, password: e.target.value })}
@@ -77,7 +78,7 @@ export const Register = () => {
 
         <C.Label>
           Repeat Password
-          <C.Input type="text" placeholder="Digite sua senha novamente" />
+          <C.Input type="password" placeholder="Digite sua senha novamente" />
         </C.Label>
 
         <C.Button>Register</C.Button>

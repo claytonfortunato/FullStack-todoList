@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import axios from "axios";
 
-import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { UserContext } from "../../contexts/Auth/AuthProvider";
 
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,7 +32,7 @@ export const LoginInput = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const auth = useContext(AuthContext);
+  const user = useContext(UserContext);
   const navigate = useNavigate();
 
   const loginForm = useForm<LoginFormData>({

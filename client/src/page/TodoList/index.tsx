@@ -9,7 +9,7 @@ import { Logout } from "../../components/Logout";
 
 import { Item } from "../../interfaces/Item";
 
-import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { UserContext } from "../../contexts/Auth/AuthProvider";
 
 import * as C from "./styles";
 
@@ -20,7 +20,7 @@ export const TodoList = () => {
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
-  const auth = useContext(AuthContext);
+  const user = useContext(UserContext);
 
   const handleTodo = (id: string) => {
     setList((prev) => {
@@ -96,6 +96,7 @@ export const TodoList = () => {
   return (
     <>
       <C.Container>
+        <C.Header>{!!user && <h2>Olá, </h2>}</C.Header>
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
           <TaskInput

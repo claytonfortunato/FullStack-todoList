@@ -8,7 +8,6 @@ const App = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-
       <AppRouter />
     </ThemeProvider>
   );

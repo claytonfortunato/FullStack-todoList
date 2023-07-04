@@ -16,7 +16,7 @@ router.use(
   })
 );
 
-router.get("/user", user);
+router.get("/", user);
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/todo", getTodo);
