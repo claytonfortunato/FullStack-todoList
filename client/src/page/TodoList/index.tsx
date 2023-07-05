@@ -21,7 +21,7 @@ export const TodoList = () => {
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const handleTodo = (id: string) => {
     setList((prev) => {
@@ -101,7 +101,7 @@ export const TodoList = () => {
   return (
     <>
       <C.Container>
-        <C.Header>{!!user && <h2>Olá, </h2>}</C.Header>
+        <Logout />
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
           <TaskInput

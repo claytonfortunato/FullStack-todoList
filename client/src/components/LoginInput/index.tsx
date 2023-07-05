@@ -63,8 +63,6 @@ export const LoginInput = () => {
         navigate("/todo");
       }
     } catch (error) {}
-
-    axios.get("/");
   };
 
   return (

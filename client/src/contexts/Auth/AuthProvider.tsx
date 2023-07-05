@@ -4,8 +4,12 @@ import { User } from "../../interfaces/Item";
 
 export const UserContext = createContext({});
 
-export const AuthProvider = ({ children }: { children: JSX.Element }) => {
-  const [user, setUser] = useState(null);
+export const UserContextProvider = ({
+  children,
+}: {
+  children: JSX.Element;
+}) => {
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (!user) {
