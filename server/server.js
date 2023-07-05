@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 const cookiePerser = require("cookie-parser");
 
 const routes = require("./src/routes/ToDoRoute");
