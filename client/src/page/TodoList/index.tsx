@@ -6,6 +6,7 @@ import { Task } from "../../components/Task";
 import { TaskInput } from "../../components/TaskInput";
 import { FilterTask } from "../../components/FilterTask";
 import { Logout } from "../../components/Logout";
+import { toast } from "react-hot-toast";
 
 import { Item } from "../../interfaces/Item";
 
@@ -30,6 +31,7 @@ export const TodoList = () => {
         }
         return todo;
       });
+
       return newValue;
     });
   };
@@ -48,13 +50,14 @@ export const TodoList = () => {
 
   const handleRemoveAll = () => {
     setList([]);
+    toast.success("Removeu todas as tarefas!");
   };
 
   const handleAddTask = (e: FormEvent) => {
     e.preventDefault();
 
     if (!description) {
-      return alert("Favor preencher a descrição!");
+      toast.error("Favor preencher o descrição!");
     } else if (description && !toggleSubmit) {
       setList(
         list.map((el) => {
@@ -80,10 +83,12 @@ export const TodoList = () => {
       ]);
     }
     setDescription("");
+    toast.success("Nova tarefa foi adicionada!");
   };
 
   const handleDeleteTask = (id: string) => {
     setList((prev) => prev.filter((todo) => todo.id !== id));
+    toast.success("Tarefa deletada");
   };
 
   const filterAll = (filter: string) => {

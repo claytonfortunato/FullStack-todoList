@@ -34,7 +34,7 @@ export const Register = () => {
       } else {
         setData({});
         toast.success("Login Successful. Welcome!");
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       console.log(error);

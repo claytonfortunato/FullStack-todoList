@@ -15,7 +15,7 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/todo" element={<TodoList />} />
       </Routes>
