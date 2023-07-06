@@ -8,9 +8,9 @@ import { FilterTask } from "../../components/FilterTask";
 import { Logout } from "../../components/Logout";
 import { toast } from "react-hot-toast";
 
-import { Item } from "../../interfaces/Item";
+import { Item } from "../../interfaces/types";
 
-import { UserContext } from "../../contexts/Auth/AuthProvider";
+import { AuthContext } from "../../contexts/Auth/AuthProvider";
 
 import * as C from "./styles";
 
@@ -21,7 +21,7 @@ export const TodoList = () => {
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
 
   const handleTodo = (id: string) => {
     setList((prev) => {

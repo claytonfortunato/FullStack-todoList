@@ -1,27 +1,41 @@
-import { useState, useEffect, createContext } from "react";
-import axios from "axios";
-import { User } from "../../interfaces/Item";
+import React, { createContext, useState, useEffect } from "react";
+import { IAuthProvider, IContext, IUser } from "../../interfaces/types";
+import {
+  LoginRequest,
+  getUserLocalStorage,
+  setUserLocalStorage,
+} from "./utils";
 
-export const UserContext = createContext({});
+export const AuthContext = createContext<IContext>({} as IContext);
 
-export const UserContextProvider = ({
-  children,
-}: {
-  children: JSX.Element;
-}) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider = ({ children }: IAuthProvider) => {
+  const [user, setUser] = useState<IUser | null>();
 
   useEffect(() => {
-    if (!user) {
-      axios.get("/todo").then(({ data }) => {
-        setUser(data);
-      });
+    const user = getUserLocalStorage();
+
+    if (user) {
+      setUser(user);
     }
   }, []);
 
+  const authenticate = async (email: string, password: string) => {
+    const response = await LoginRequest(email, password);
+
+    const payload = { token: response.token, email };
+
+    setUser(payload);
+    setUserLocalStorage(payload);
+  };
+
+  const logout = () => {
+    setUser(null);
+    setUserLocalStorage(null);
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ ...user, authenticate, logout }}>
       {children}
-    </UserContext.Provider>
+    </AuthContext.Provider>
   );
 };

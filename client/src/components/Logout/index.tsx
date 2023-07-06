@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "../../assets/icons/sign-out.svg";
 
-import { UserContext } from "../../contexts/Auth/AuthProvider";
+import { AuthContext } from "../../contexts/Auth/AuthProvider";
 
 import * as C from "./styles";
 
 export const Logout = () => {
-  const { user } = useContext<any>(UserContext);
+  const { user } = useContext<any>(AuthContext);
   const navigate = useNavigate();
 
   const HandleLogout = () => {

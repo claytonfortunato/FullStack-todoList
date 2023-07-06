@@ -1,20 +1,20 @@
-import { useContext, useState } from "react";
-import axios from "axios";
+import { FormEvent, FormEventHandler, useContext, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 
-import { UserContext } from "../../contexts/Auth/AuthProvider";
 import { toast } from "react-hot-toast";
 
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useAuth } from "../../contexts/Auth/useAuth";
 import * as C from "./styles";
+import { api } from "../../services/api";
 
 interface Props {
   email: string;
   password: string;
-  error?: string;
 }
 
 const loginFormValidationSchema = zod.object({
@@ -34,7 +34,7 @@ export const LoginInput = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const user = useContext(UserContext);
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const loginForm = useForm<LoginFormData>({
@@ -45,29 +45,17 @@ export const LoginInput = () => {
     },
   });
 
-  const handleLogin = async (e: any) => {
+  async function onFinish(e: FormEvent<HTMLInputElement>) {
     e.preventDefault();
 
-    const { email, password } = data;
-
     try {
-      await axios.post("/login", {
-        email,
-        password,
-      });
-      if (data.error) {
-        toast.error(data.error);
-      } else {
-        setData({});
-        toast.success("Login successfull!");
-        navigate("/todo");
-      }
+      await api.post("/login", { email, password });
     } catch (error) {}
-  };
+  }
 
   return (
     <FormProvider {...loginForm}>
-      <C.Container noValidate onSubmit={handleLogin}>
+      <C.Container noValidate onSubmit={() => onFinish}>
         <C.Content>
           <C.Label>
             Email
