@@ -13,15 +13,22 @@ import { useForm, FormProvider } from "react-hook-form";
 import * as C from "./styles";
 
 const loginFormValidationSchema = zod.object({
-  nome: zod.string({
-    required_error: "nome é obrigatório",
-  }),
+  name: zod
+    .string()
+    .nonempty("O nome é obrigatório")
+    .transform((name) => {
+      return name
+        .trim()
+        .split(" ")
+        .map((word) => {
+          return word[8].toLocaleUpperCase().concat(word.substring(1));
+        });
+    }),
   email: zod
-    .string({
-      required_error: "Email é obrigatório",
-    })
+    .string()
+    .nonempty("O e-mail é obrigatório")
     .email("Digite um e-mail válido"),
-  password: zod.string().min(6, "Senha é obrigatória"),
+  password: zod.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
 });
 
 type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
@@ -29,11 +36,6 @@ type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
 export const Register = () => {
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginFormValidationSchema),
-    defaultValues: {
-      nome: "",
-      email: "",
-      password: "",
-    },
   });
 
   const navigate = useNavigate();
@@ -76,9 +78,9 @@ export const Register = () => {
         >
           <Input
             label="Nome"
-            name="nome"
+            name="name"
             placeholder="Digite seu nome"
-            error={loginForm.formState.errors.nome?.message}
+            error={loginForm.formState.errors.name?.message}
           />
           <Input
             label="Email"
@@ -100,40 +102,6 @@ export const Register = () => {
             name="password"
             error={loginForm.formState.errors.password?.message}
           />
-          {/* <C.Label>
-          Name
-          <C.Input
-            type="text"
-            placeholder="Digite seu nome"
-            value={data.name}
-            onChange={(e) => setData({ ...data, name: e.target.value })}
-          />
-        </C.Label>
-
-        <C.Label>
-          Email
-          <C.Input
-            type="text"
-            placeholder="Digite o seu email"
-            value={data.email}
-            onChange={(e) => setData({ ...data, email: e.target.value })}
-          />
-        </C.Label>
-
-        <C.Label>
-          Password
-          <C.Input
-            type="password"
-            placeholder="Digite sua senha"
-            value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
-          />
-        </C.Label>
-
-        <C.Label>
-          Repeat Password
-          <C.Input type="password" placeholder="Digite sua senha novamente" />
-        </C.Label> */}
 
           <C.Button type="submit">Register</C.Button>
         </C.ContainerForm>

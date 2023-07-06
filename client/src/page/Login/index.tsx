@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
 
-import { LoginInput } from "../../components/LoginInput";
-
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
@@ -40,8 +38,11 @@ export const Login = () => {
     <FormProvider {...loginForm}>
       <C.Container>
         <C.Header>ToDo List</C.Header>
-        {/* <LoginInput /> */}
-        <C.ContainerForm noValidate>
+
+        <C.ContainerForm
+          noValidate
+          onSubmit={loginForm.handleSubmit(registerUser)}
+        >
           <Input
             label="Email"
             placeholder="Digite seu e-mail"
