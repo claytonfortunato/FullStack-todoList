@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
 import * as C from "./styles";
+import { useState } from "react";
 
 const loginFormValidationSchema = zod.object({
   email: zod
@@ -21,6 +22,8 @@ const loginFormValidationSchema = zod.object({
 type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
 
 export const Login = () => {
+  const [loading, setLoading] = useState(false);
+
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginFormValidationSchema),
     defaultValues: {
@@ -38,12 +41,24 @@ export const Login = () => {
       <C.Container>
         <C.Header>ToDo List</C.Header>
         {/* <LoginInput /> */}
-        <Input
-          label="Email"
-          placeholder="Digite seu e-mail"
-          name="email"
-          error={loginForm.formState.errors.email?.message}
-        />
+        <C.ContainerForm noValidate>
+          <Input
+            label="Email"
+            placeholder="Digite seu e-mail"
+            name="email"
+            error={loginForm.formState.errors.email?.message}
+          />
+
+          <Input
+            label="Senha"
+            placeholder="Digite sua senha"
+            name="password"
+            type="password"
+            error={loginForm.formState.errors.email?.message}
+          />
+
+          <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>
+        </C.ContainerForm>
         <C.Action>
           <p>Você não possui conta?</p>
           <Link to="/register">Sign up</Link>

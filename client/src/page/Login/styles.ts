@@ -5,6 +5,16 @@ export const Container = styled.div`
   width: 100%;
 `;
 
+export const ContainerForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  background-color: ${(props) => props.theme.colors.white};
+  width: 400px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #333;
+`;
+
 export const Header = styled.h1`
   text-align: center;
   font-size: 3.2rem;
@@ -34,4 +44,14 @@ export const Action = styled.div`
       text-decoration: underline;
     }
   }
+`;
+
+export const Button = styled.button`
+  background-color: ${(props) => props.theme.colors.purple};
+  color: ${(props) => props.theme.colors.white};
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 2rem;
 `;
