@@ -17,6 +17,17 @@ export const LabelWrapper = styled.div`
     margin: 6px 0px;
     font-size: 14px;
   }
+
+  a {
+    font-size: 12px;
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.purple};
+    transition: all 200ms ease-in;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export const InputWrapper = styled.div<InputWrapperProps>`
@@ -25,7 +36,8 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+
+  gap: 2rem;
 
   input {
     width: 100%;
@@ -34,6 +46,12 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     outline: none;
     border: 1px solid ${(props) => props.theme.colors.black};
 
+    font-size: 1.4rem;
+
+    &::placeholder {
+      color: ${(props) => props.theme.colors.grey400};
+    }
+
     &:focus-within,
     :hover {
       border: 1px solid ${(props) => props.theme.colors.purple};
@@ -41,8 +59,8 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   }
 
   img {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2.4rem;
+    height: 2.4rem;
     cursor: pointer;
   }
 `;

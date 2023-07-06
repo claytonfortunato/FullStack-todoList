@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { Input } from "../../components/Input";
 
 import * as zod from "zod";
@@ -6,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
 import * as C from "./styles";
-import { useState } from "react";
 
 const loginFormValidationSchema = zod.object({
   email: zod
@@ -14,7 +15,11 @@ const loginFormValidationSchema = zod.object({
       required_error: "Email é obrigatório",
     })
     .email("Digite um e-mail válido"),
-  password: zod.string().min(1, "Senha é obrigatória"),
+  password: zod
+    .string({
+      required_error: "Senha é obrigatório",
+    })
+    .min(6, "A senha precisa de no mínimo 6 caracteres"),
 });
 
 type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
@@ -24,10 +29,6 @@ export const Login = () => {
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginFormValidationSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
   });
 
   const registerUser = async () => {
@@ -48,14 +49,15 @@ export const Login = () => {
             placeholder="Digite seu e-mail"
             name="email"
             error={loginForm.formState.errors.email?.message}
+            onInvalid={() => console.log(123)}
           />
 
           <Input
             label="Senha"
             placeholder="Digite sua senha"
-            name="password"
+            name="password1"
             type="password"
-            error={loginForm.formState.errors.email?.message}
+            error={loginForm.formState.errors.password?.message}
           />
 
           <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>

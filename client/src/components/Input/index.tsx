@@ -23,6 +23,7 @@ export const Input = ({
   const { register } = useFormContext();
 
   const actualType = obtainInputActualType();
+  const recoverPassword = <a href="#">Esqueceu a senha?</a>;
 
   const Icon = hidden ? (
     <img src={EyeSlash} alt="" onClick={handleToggleHideen} />
@@ -46,6 +47,7 @@ export const Input = ({
     <C.Container>
       <C.LabelWrapper>
         <label htmlFor={name}>{label}</label>
+        {name === "password1" ? recoverPassword : <></>}
       </C.LabelWrapper>
       <C.InputWrapper error={!!error}>
         <input

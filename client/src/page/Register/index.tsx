@@ -44,6 +44,7 @@ export const Register = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const registerUser = async () => {
