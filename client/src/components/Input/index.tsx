@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState, ChangeEvent } from "react";
+import { InputHTMLAttributes, useState, ChangeEventHandler } from "react";
 
 import Eye from "../../assets/icons/eye.svg";
 import EyeSlash from "../../assets/icons/eye-slash.svg";
@@ -10,7 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   name: string;
   error: string | undefined;
-  data: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: any) => void;
 }
 
 export const Input = ({
@@ -19,7 +19,7 @@ export const Input = ({
   type,
   error,
   value,
-  data,
+  onChange,
   ...inputProps
 }: InputProps) => {
   const [hidden, setHidden] = useState(true);
@@ -57,7 +57,7 @@ export const Input = ({
           id={name}
           type={actualType}
           value={value}
-          onChange={data}
+          onChange={onChange}
           {...register(name)}
           {...inputProps}
         />

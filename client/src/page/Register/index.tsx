@@ -1,84 +1,13 @@
-import { useState, ChangeEvent } from "react";
-import { api } from "../../services/api";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
+import { FormProvider } from "react-hook-form";
 
-import { IRegisterProps } from "../../interfaces/types";
-
-import * as zod from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, FormProvider } from "react-hook-form";
+import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
 
-const loginFormValidationSchema = zod.object({
-  name: zod
-    .string()
-    .nonempty("O nome é obrigatório")
-    .transform((name) => {
-      return name
-        .trim()
-        .split(" ")
-        .map((word) => {
-          return word[8].toLocaleUpperCase().concat(word.substring(1));
-        });
-    }),
-  email: zod
-    .string()
-    .nonempty("O e-mail é obrigatório")
-    .email("Digite um e-mail válido"),
-  password: zod.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
-});
-
-type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
-
 export const Register = () => {
-  const loginForm = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormValidationSchema),
-  });
-
-  const navigate = useNavigate();
-
-  const [data, setData] = useState<IRegisterProps>({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const registerUser = async (e: any) => {
-    loginForm.reset();
-    e.preventDefault();
-    const { name, email, password } = data;
-    try {
-      const { data } = await api.post("/register", {
-        name,
-        email,
-        password,
-      });
-      if (data.error) {
-        toast.error(data.error);
-      } else {
-        toast.success("Login Successful. Welcome!");
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, name: e.target.value });
-  };
-
-  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, email: e.target.value });
-  };
-
-  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, password: e.target.value });
-  };
+  const { loginForm, registerUser, data, setData } = useRegister();
 
   return (
     <FormProvider {...loginForm}>
@@ -95,7 +24,7 @@ export const Register = () => {
             placeholder="Digite seu nome"
             error={loginForm.formState.errors.name?.message}
             value={data.name}
-            data={handleChangeName}
+            onChange={(e) => setData({ ...data, name: e.target.value })}
           />
           <Input
             label="Email"
@@ -103,7 +32,7 @@ export const Register = () => {
             name="email"
             error={loginForm.formState.errors.email?.message}
             value={data.email}
-            data={handleChangeEmail}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
           />
           <Input
             label="Senha"
@@ -112,7 +41,7 @@ export const Register = () => {
             name="password"
             error={loginForm.formState.errors.password?.message}
             value={data.password}
-            data={handleChangePassword}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
           />
           <Input
             label="Senha novamente"
@@ -121,7 +50,7 @@ export const Register = () => {
             name="password"
             error={loginForm.formState.errors.password?.message}
             value={data.password}
-            data={handleChangePassword}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
           />
 
           <C.Button type="submit">Register</C.Button>
