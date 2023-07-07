@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { api } from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -47,25 +47,37 @@ export const Register = () => {
     confirmPassword: "",
   });
 
-  const registerUser = async () => {
+  const registerUser = async (e: any) => {
     loginForm.reset();
-    // e.preventDefault();
-    // const { name, email, password } = data;
-    // try {
-    //   const { data } = await api.post("/register", {
-    //     name,
-    //     email,
-    //     password,
-    //   });
-    //   if (data.error) {
-    //     toast.error(data.error);
-    //   } else {
-    //     toast.success("Login Successful. Welcome!");
-    //     navigate("/");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    e.preventDefault();
+    const { name, email, password } = data;
+    try {
+      const { data } = await api.post("/register", {
+        name,
+        email,
+        password,
+      });
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        toast.success("Login Successful. Welcome!");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, name: e.target.value });
+  };
+
+  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, email: e.target.value });
+  };
+
+  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, password: e.target.value });
   };
 
   return (
@@ -82,12 +94,16 @@ export const Register = () => {
             name="name"
             placeholder="Digite seu nome"
             error={loginForm.formState.errors.name?.message}
+            value={data.name}
+            data={handleChangeName}
           />
           <Input
             label="Email"
             placeholder="Digite seu e-mail"
             name="email"
             error={loginForm.formState.errors.email?.message}
+            value={data.email}
+            data={handleChangeEmail}
           />
           <Input
             label="Senha"
@@ -95,6 +111,8 @@ export const Register = () => {
             type="password"
             name="password"
             error={loginForm.formState.errors.password?.message}
+            value={data.password}
+            data={handleChangePassword}
           />
           <Input
             label="Senha novamente"
@@ -102,6 +120,8 @@ export const Register = () => {
             type="password"
             name="password"
             error={loginForm.formState.errors.password?.message}
+            value={data.password}
+            data={handleChangePassword}
           />
 
           <C.Button type="submit">Register</C.Button>
