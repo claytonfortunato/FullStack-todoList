@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 
 import { Input } from "../../components/Input";
@@ -6,6 +6,8 @@ import { Input } from "../../components/Input";
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
+
+import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
 
@@ -26,6 +28,7 @@ type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
 
 export const Login = () => {
   const [loading, setLoading] = useState(false);
+  const { data, setData } = useRegister();
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginFormValidationSchema),
@@ -33,6 +36,14 @@ export const Login = () => {
 
   const registerUser = async () => {
     loginForm.reset();
+  };
+
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, name: e.target.value });
+  };
+
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, email: e.target.value });
   };
 
   return (
@@ -50,6 +61,8 @@ export const Login = () => {
             name="email"
             error={loginForm.formState.errors.email?.message}
             onInvalid={() => console.log(123)}
+            value={data.name}
+            handleChange={handleName}
           />
 
           <Input
@@ -58,6 +71,8 @@ export const Login = () => {
             name="password1"
             type="password"
             error={loginForm.formState.errors.password?.message}
+            value={data.email}
+            handleChange={handleEmail}
           />
 
           <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>

@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { FormProvider } from "react-hook-form";
@@ -8,6 +9,22 @@ import * as C from "./styles";
 
 export const Register = () => {
   const { loginForm, registerUser, data, setData } = useRegister();
+
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, name: e.target.value });
+  };
+
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, email: e.target.value });
+  };
+
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, password: e.target.value });
+  };
+
+  const handleConfirmPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, confirmPassword: e.target.value });
+  };
 
   return (
     <FormProvider {...loginForm}>
@@ -21,10 +38,11 @@ export const Register = () => {
           <Input
             label="Nome"
             name="name"
+            id="name"
             placeholder="Digite seu nome"
             error={loginForm.formState.errors.name?.message}
             value={data.name}
-            onChange={(e) => setData({ ...data, name: e.target.value })}
+            handleChange={handleName}
           />
           <Input
             label="Email"
@@ -32,7 +50,7 @@ export const Register = () => {
             name="email"
             error={loginForm.formState.errors.email?.message}
             value={data.email}
-            onChange={(e) => setData({ ...data, email: e.target.value })}
+            handleChange={handleEmail}
           />
           <Input
             label="Senha"
@@ -41,16 +59,16 @@ export const Register = () => {
             name="password"
             error={loginForm.formState.errors.password?.message}
             value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            handleChange={handlePassword}
           />
           <Input
             label="Senha novamente"
             placeholder="Digite sua senha novamente"
             type="password"
-            name="password"
+            name="password2"
             error={loginForm.formState.errors.password?.message}
-            value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            value={data.confirmPassword}
+            handleChange={handleConfirmPassword}
           />
 
           <C.Button type="submit">Register</C.Button>
