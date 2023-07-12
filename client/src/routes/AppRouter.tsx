@@ -20,14 +20,7 @@ export const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/todo"
-            element={
-              <ProtectedLayout>
-                <TodoList />
-              </ProtectedLayout>
-            }
-          />
+          <Route path="/todo" element={<TodoList />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -7,6 +7,7 @@ import { TaskInput } from "../../components/TaskInput";
 import { FilterTask } from "../../components/FilterTask";
 import { Logout } from "../../components/Logout";
 import { toast } from "react-hot-toast";
+import { api } from "../../services/api";
 
 import { Item } from "../../interfaces/types";
 
@@ -53,8 +54,16 @@ export const TodoList = () => {
     toast.success("Removeu todas as tarefas!");
   };
 
-  const handleAddTask = (e: FormEvent) => {
+  const handleAddTask = async (e: FormEvent) => {
     e.preventDefault();
+
+    const { title, done } = description;
+    try {
+      const { d } = await api.post("/todos", {
+        title,
+        done,
+      });
+    } catch (error) {}
 
     if (!description) {
       toast.error("Favor preencher o descrição!");

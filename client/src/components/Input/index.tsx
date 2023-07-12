@@ -4,6 +4,8 @@ import Eye from "../../assets/icons/eye.svg";
 import EyeSlash from "../../assets/icons/eye-slash.svg";
 
 import { useFormContext } from "react-hook-form";
+import { useRegister } from "../../hook/useRegister";
+
 import * as C from "./styles";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -23,7 +25,8 @@ export const Input = ({
   ...inputProps
 }: InputProps) => {
   const [hidden, setHidden] = useState(true);
-  const { register } = useFormContext();
+  // const { register } = useFormContext();
+  const { register } = useRegister();
 
   const actualType = obtainInputActualType();
   const recoverPassword = <a href="#">Esqueceu a senha?</a>;
