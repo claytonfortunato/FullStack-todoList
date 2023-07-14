@@ -1,12 +1,5 @@
-import React, { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import { toast } from "react-hot-toast";
-
-import { z, ZodType } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { api } from "../../services/api";
 
 import Eye from "../../assets/icons/eye.svg";
 import EyeSlash from "../../assets/icons/eye-slash.svg";
@@ -15,50 +8,13 @@ import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
 
-interface LoginProps {
-  email: string;
-  password: string;
-}
-
-// const loginFormValidationSchema: ZodType<LoginProps> = z.object({
-//   email: z
-//     .string({
-//       required_error: "Email é obrigatório",
-//     })
-//     .email("Digite um e-mail válido"),
-//   password: z
-//     .string({
-//       required_error: "Senha é obrigatório",
-//     })
-//     .min(6, "A senha precisa de no mínimo 6 caracteres"),
-// });
-
-// const {
-//   register,
-//   handleSubmit,
-//   formState: { errors },
-// } = useForm({
-//   resolver: zodResolver(loginFormValidationSchema),
-//   defaultValues: {
-//     email: "",
-//     password: "",
-//   },
-// });
-
-// type LoginFormData = z.infer<typeof loginFormValidationSchema>;
-
-// const LoginFormData = useForm<LoginFormData>({
-//   resolver: zodResolver(loginFormValidationSchema),
-// });
-
 export const Login = () => {
   const [hidden, setHidden] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const { setData, data, handleSubmit, loginUser, errors, register } =
     useRegister();
-
-  const [loading, setLoading] = useState(false);
 
   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, password: e.target.value });
@@ -89,7 +45,7 @@ export const Login = () => {
             <p>Esqueceu a senha?</p>
           </div>
           <input
-            type="password"
+            type={!hidden ? "text" : "password"}
             {...register("password")}
             value={data.password}
             onChange={handlePassword}

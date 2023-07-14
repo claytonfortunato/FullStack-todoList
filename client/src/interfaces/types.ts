@@ -16,11 +16,6 @@ export interface RegisterProps {
   confirmPassword: string;
 }
 
-export interface Context extends User {
-  authenticate: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-}
-
 export interface AuthProvider {
   children: JSX.Element;
 }

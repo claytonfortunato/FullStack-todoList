@@ -47,6 +47,8 @@ export const ContainerForm = styled.form`
     }
 
     > label {
+      margin: 6px 0px;
+      font-size: 14px;
     }
 
     > span {
@@ -86,7 +88,7 @@ export const ContainerForm = styled.form`
     .hiden {
       position: absolute;
       right: 0;
-      top: 25px;
+      top: 36px;
       margin-right: 10px;
       cursor: pointer;
     }
