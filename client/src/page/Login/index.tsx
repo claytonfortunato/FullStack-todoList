@@ -8,6 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
 
+import Eye from "../../assets/icons/eye.svg";
+import EyeSlash from "../../assets/icons/eye-slash.svg";
+
 import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
@@ -49,36 +52,13 @@ interface LoginProps {
 // });
 
 export const Login = () => {
+  const [hidden, setHidden] = useState(true);
   const navigate = useNavigate();
 
   const { setData, data, handleSubmit, loginUser, errors, register } =
     useRegister();
 
   const [loading, setLoading] = useState(false);
-  // const [data, setData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-
-  // const loginForm = useForm<LoginFormData>({
-  //   resolver: zodResolver(loginFormValidationSchema),
-  // });
-
-  // const loginUser = async () => {
-  //   const { email, password } = data;
-
-  //   try {
-  //     const { data } = await api.post("/login", {
-  //       email,
-  //       password,
-  //     });
-  //     if (data.error) {
-  //       toast.error(data.error);
-  //     } else {
-  //       navigate("/todo");
-  //     }
-  //   } catch (error) {}
-  // };
 
   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, password: e.target.value });
@@ -103,14 +83,21 @@ export const Login = () => {
           />
           {errors.email && <span> {errors.email.message} </span>}
         </div>
-        <div className="contentLogin">
-          <label>Senha</label>
+        <div className="contentPass">
+          <div className="contentLabel">
+            <label>Senha</label>
+            <p>Esqueceu a senha?</p>
+          </div>
           <input
             type="password"
             {...register("password")}
             value={data.password}
             onChange={handlePassword}
           />
+
+          <div className="hiden" onClick={() => setHidden(!hidden)}>
+            {!hidden ? <img src={Eye} /> : <img src={EyeSlash} />}
+          </div>
           {errors.password && <span> {errors.password.message} </span>}
         </div>
         <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>

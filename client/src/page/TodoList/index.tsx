@@ -6,9 +6,8 @@ import { v4 } from "uuid";
 import { Task } from "../../components/Task";
 import { TaskInput } from "../../components/TaskInput";
 import { FilterTask } from "../../components/FilterTask";
-import { Logout } from "../../components/Logout";
+
 import { toast } from "react-hot-toast";
-import { api } from "../../services/api";
 
 import { Item } from "../../interfaces/types";
 
@@ -99,7 +98,6 @@ export const TodoList = () => {
   return (
     <>
       <C.Container>
-        {/* <Logout /> */}
         {!!user && <h2>H1 {user.name}</h2>}
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>

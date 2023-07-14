@@ -1,12 +1,16 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { Input } from "../../components/Input";
+
+import Eye from "../../assets/icons/eye.svg";
+import EyeSlash from "../../assets/icons/eye-slash.svg";
 
 import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
 
 export const Register = () => {
+  const [hidden, setHidden] = useState(true);
+
   const { setData, data, handleSubmit, registerUser, errors, register } =
     useRegister();
 
@@ -53,25 +57,32 @@ export const Register = () => {
           {errors.email && <span> {errors.email.message} </span>}
         </div>
 
-        <div className="contentRegister">
+        <div className="contentPass">
           <label>Senha</label>
           <input
-            type="password"
+            type={!hidden ? "text" : "password"}
             {...register("password")}
             value={data.password}
             onChange={handlePassword}
           />
+
+          <div className="hiden" onClick={() => setHidden(!hidden)}>
+            {!hidden ? <img src={Eye} /> : <img src={EyeSlash} />}
+          </div>
           {errors.password && <span> {errors.password.message} </span>}
         </div>
 
-        <div className="contentRegister">
+        <div className="contentPass">
           <label>Senha novamente</label>
           <input
-            type="password"
+            type={!hidden ? "text" : "password"}
             {...register("confirmPassword")}
             value={data.confirmPassword}
             onChange={handleConfirmPassword}
           />
+          <div className="hiden" onClick={() => setHidden(!hidden)}>
+            {!hidden ? <img src={Eye} /> : <img src={EyeSlash} />}
+          </div>
           {errors.confirmPassword && (
             <span> {errors.confirmPassword.message} </span>
           )}

@@ -22,6 +22,7 @@ export const ContainerForm = styled.form`
     width: 100%;
 
     > input {
+      position: relative;
       width: 100%;
       padding: 4px;
       border-radius: 8px;
@@ -48,6 +49,43 @@ export const ContainerForm = styled.form`
     > span {
       color: red;
       font-size: 1.2rem;
+    }
+  }
+
+  .contentPass {
+    position: relative;
+
+    > label {
+      margin: 6px 0px;
+      font-size: 14px;
+    }
+
+    > input {
+      width: 100%;
+      position: relative;
+      padding: 4px;
+      border-radius: 8px;
+      outline: none;
+      border: 1px solid ${(props) => props.theme.colors.black};
+
+      font-size: 1.4rem;
+
+      &::placeholder {
+        color: ${(props) => props.theme.colors.grey400};
+      }
+
+      &:focus-within,
+      :hover {
+        border: 1px solid ${(props) => props.theme.colors.purple};
+      }
+    }
+
+    .hiden {
+      position: absolute;
+      right: 0;
+      top: 25px;
+      margin-right: 10px;
+      cursor: pointer;
     }
   }
 `;
