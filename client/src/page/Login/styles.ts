@@ -13,6 +13,38 @@ export const ContainerForm = styled.form`
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #333;
+
+  > .contentLogin {
+    width: 100%;
+    > input {
+      width: 100%;
+      padding: 4px;
+      border-radius: 8px;
+      outline: none;
+      border: 1px solid ${(props) => props.theme.colors.black};
+
+      font-size: 1.4rem;
+
+      &::placeholder {
+        color: ${(props) => props.theme.colors.grey400};
+      }
+
+      &:focus-within,
+      :hover {
+        border: 1px solid ${(props) => props.theme.colors.purple};
+      }
+    }
+
+    > label {
+      margin: 6px 0px;
+      font-size: 14px;
+    }
+
+    > span {
+      color: red;
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const Header = styled.h1`

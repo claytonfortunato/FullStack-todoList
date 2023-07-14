@@ -1,14 +1,14 @@
 import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
-import { FormProvider } from "react-hook-form";
 
 import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
 
 export const Register = () => {
-  const { setData, data, handleSubmit, registerUser, errors } = useRegister();
+  const { setData, data, handleSubmit, registerUser, errors, register } =
+    useRegister();
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, name: e.target.value });
@@ -31,42 +31,51 @@ export const Register = () => {
       <C.Header>Register Account</C.Header>
 
       <C.ContainerForm onSubmit={handleSubmit(registerUser)}>
-        <Input
-          label="Nome"
-          name="name"
-          id="name"
-          placeholder="Digite seu nome"
-          value={data.name}
-          handleChange={handleName}
-          error={errors.name?.message}
-        />
-        <Input
-          label="Email"
-          placeholder="Digite seu e-mail"
-          name="email"
-          error={errors.email?.message}
-          value={data.email}
-          handleChange={handleEmail}
-        />
-        <Input
-          label="Senha"
-          placeholder="Digite sua senha"
-          type="password"
-          name="password"
-          error={errors.password?.message}
-          value={data.password}
-          handleChange={handlePassword}
-        />
-        <Input
-          label="Senha novamente"
-          placeholder="Digite sua senha novamente"
-          type="password"
-          name="password2"
-          error={errors.confirmPassword?.message}
-          value={data.confirmPassword}
-          handleChange={handleConfirmPassword}
-        />
+        <div className="contentRegister">
+          <label>Nome</label>
+          <input
+            type="text"
+            {...register("name")}
+            value={data.name}
+            onChange={handleName}
+          />
+          {errors.name && <span> {errors.name.message} </span>}
+        </div>
 
+        <div className="contentRegister">
+          <label>Email</label>
+          <input
+            type="text"
+            {...register("email")}
+            value={data.email}
+            onChange={handleEmail}
+          />
+          {errors.email && <span> {errors.email.message} </span>}
+        </div>
+
+        <div className="contentRegister">
+          <label>Senha</label>
+          <input
+            type="password"
+            {...register("password")}
+            value={data.password}
+            onChange={handlePassword}
+          />
+          {errors.password && <span> {errors.password.message} </span>}
+        </div>
+
+        <div className="contentRegister">
+          <label>Senha novamente</label>
+          <input
+            type="password"
+            {...register("confirmPassword")}
+            value={data.confirmPassword}
+            onChange={handleConfirmPassword}
+          />
+          {errors.confirmPassword && (
+            <span> {errors.confirmPassword.message} </span>
+          )}
+        </div>
         <C.Button type="submit">Register</C.Button>
       </C.ContainerForm>
 

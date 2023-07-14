@@ -4,23 +4,23 @@ export interface Item {
   done: boolean;
 }
 
-export interface IUser {
+export interface User {
   email?: string;
   token?: string;
 }
 
-export interface IRegisterProps {
+export interface RegisterProps {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-export interface IContext extends IUser {
+export interface Context extends User {
   authenticate: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
-export interface IAuthProvider {
+export interface AuthProvider {
   children: JSX.Element;
 }

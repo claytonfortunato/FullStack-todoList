@@ -1,45 +1,87 @@
-import { useState, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, ChangeEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Input } from "../../components/Input";
+import { toast } from "react-hot-toast";
 
-import * as zod from "zod";
+import { z, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { api } from "../../services/api";
 
 import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
 
-const loginFormValidationSchema = zod.object({
-  email: zod
-    .string({
-      required_error: "Email é obrigatório",
-    })
-    .email("Digite um e-mail válido"),
-  password: zod
-    .string({
-      required_error: "Senha é obrigatório",
-    })
-    .min(6, "A senha precisa de no mínimo 6 caracteres"),
-});
+interface LoginProps {
+  email: string;
+  password: string;
+}
 
-type LoginFormData = zod.infer<typeof loginFormValidationSchema>;
+// const loginFormValidationSchema: ZodType<LoginProps> = z.object({
+//   email: z
+//     .string({
+//       required_error: "Email é obrigatório",
+//     })
+//     .email("Digite um e-mail válido"),
+//   password: z
+//     .string({
+//       required_error: "Senha é obrigatório",
+//     })
+//     .min(6, "A senha precisa de no mínimo 6 caracteres"),
+// });
+
+// const {
+//   register,
+//   handleSubmit,
+//   formState: { errors },
+// } = useForm({
+//   resolver: zodResolver(loginFormValidationSchema),
+//   defaultValues: {
+//     email: "",
+//     password: "",
+//   },
+// });
+
+// type LoginFormData = z.infer<typeof loginFormValidationSchema>;
+
+// const LoginFormData = useForm<LoginFormData>({
+//   resolver: zodResolver(loginFormValidationSchema),
+// });
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+  const { setData, data, handleSubmit, loginUser, errors, register } =
+    useRegister();
+
   const [loading, setLoading] = useState(false);
-  const { data, setData } = useRegister();
+  // const [data, setData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
-  const loginForm = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormValidationSchema),
-  });
+  // const loginForm = useForm<LoginFormData>({
+  //   resolver: zodResolver(loginFormValidationSchema),
+  // });
 
-  const registerUser = async () => {
-    loginForm.reset();
-  };
+  // const loginUser = async () => {
+  //   const { email, password } = data;
 
-  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, name: e.target.value });
+  //   try {
+  //     const { data } = await api.post("/login", {
+  //       email,
+  //       password,
+  //     });
+  //     if (data.error) {
+  //       toast.error(data.error);
+  //     } else {
+  //       navigate("/todo");
+  //     }
+  //   } catch (error) {}
+  // };
+
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, password: e.target.value });
   };
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,41 +89,36 @@ export const Login = () => {
   };
 
   return (
-    <FormProvider {...loginForm}>
-      <C.Container>
-        <C.Header>ToDo List</C.Header>
+    <C.Container>
+      <C.Header>ToDo List</C.Header>
 
-        <C.ContainerForm
-          noValidate
-          onSubmit={loginForm.handleSubmit(registerUser)}
-        >
-          <Input
-            label="Email"
-            placeholder="Digite seu e-mail"
-            name="email"
-            error={loginForm.formState.errors.email?.message}
-            onInvalid={() => console.log(123)}
-            value={data.name}
-            handleChange={handleName}
-          />
-
-          <Input
-            label="Senha"
-            placeholder="Digite sua senha"
-            name="password1"
-            type="password"
-            error={loginForm.formState.errors.password?.message}
+      <C.ContainerForm onSubmit={handleSubmit(loginUser)}>
+        <div className="contentLogin">
+          <label>Email</label>
+          <input
+            type="text"
+            {...register("email")}
             value={data.email}
-            handleChange={handleEmail}
+            onChange={handleEmail}
           />
-
-          <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>
-        </C.ContainerForm>
-        <C.Action>
-          <p>Você não possui conta?</p>
-          <Link to="/register">Sign up</Link>
-        </C.Action>
-      </C.Container>
-    </FormProvider>
+          {errors.email && <span> {errors.email.message} </span>}
+        </div>
+        <div className="contentLogin">
+          <label>Senha</label>
+          <input
+            type="password"
+            {...register("password")}
+            value={data.password}
+            onChange={handlePassword}
+          />
+          {errors.password && <span> {errors.password.message} </span>}
+        </div>
+        <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>
+      </C.ContainerForm>
+      <C.Action>
+        <p>Você não possui conta?</p>
+        <Link to="/register">Sign up</Link>
+      </C.Action>
+    </C.Container>
   );
 };

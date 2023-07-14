@@ -6,15 +6,15 @@ import { TodoList } from "../page/TodoList";
 import { Register } from "../page/Register";
 
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "../contexts/Auth/AuthProvider";
-import { ProtectedLayout } from "../components/ProtectedLayout";
+
+import { UserContextProvider } from "../contexts/Auth/userContext";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 export const AppRouter = () => {
   return (
-    <AuthProvider>
+    <UserContextProvider>
       <BrowserRouter>
         <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
         <Routes>
@@ -23,6 +23,6 @@ export const AppRouter = () => {
           <Route path="/todo" element={<TodoList />} />
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
+    </UserContextProvider>
   );
 };

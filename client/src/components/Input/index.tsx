@@ -60,7 +60,7 @@ export const Input = ({
           id={name}
           type={actualType}
           value={value}
-          {...register(name, { onChange: handleChange })}
+          {...register("name", { required: true, onChange: handleChange })}
           {...inputProps}
         />
 

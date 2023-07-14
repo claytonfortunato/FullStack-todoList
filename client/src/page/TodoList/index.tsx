@@ -1,4 +1,5 @@
 import { FormEvent, useContext, useState } from "react";
+import { UserContext } from "../../contexts/Auth/userContext";
 
 import { v4 } from "uuid";
 
@@ -11,8 +12,6 @@ import { api } from "../../services/api";
 
 import { Item } from "../../interfaces/types";
 
-import { AuthContext } from "../../contexts/Auth/AuthProvider";
-
 import * as C from "./styles";
 
 export const TodoList = () => {
@@ -22,7 +21,7 @@ export const TodoList = () => {
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(UserContext);
 
   const handleTodo = (id: string) => {
     setList((prev) => {
@@ -57,14 +56,6 @@ export const TodoList = () => {
   const handleAddTask = async (e: FormEvent) => {
     e.preventDefault();
 
-    const { title, done } = description;
-    try {
-      const { d } = await api.post("/todos", {
-        title,
-        done,
-      });
-    } catch (error) {}
-
     if (!description) {
       toast.error("Favor preencher o descrição!");
     } else if (description && !toggleSubmit) {
@@ -91,8 +82,6 @@ export const TodoList = () => {
         },
       ]);
     }
-    setDescription("");
-    toast.success("Nova tarefa foi adicionada!");
   };
 
   const handleDeleteTask = (id: string) => {
@@ -110,7 +99,8 @@ export const TodoList = () => {
   return (
     <>
       <C.Container>
-        <Logout />
+        {/* <Logout /> */}
+        {!!user && <h2>H1 {user.name}</h2>}
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
           <TaskInput
