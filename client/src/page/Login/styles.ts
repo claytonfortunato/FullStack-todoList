@@ -85,7 +85,7 @@ export const ContainerForm = styled.form`
       }
     }
 
-    .hiden {
+    .hidden {
       position: absolute;
       right: 0;
       top: 36px;
@@ -134,4 +134,9 @@ export const Button = styled.button`
   border-radius: 8px;
   cursor: pointer;
   margin-top: 2rem;
+`;
+
+export const InvalidError = styled.span`
+  color: red;
+  font-size: 1.2rem;
 `;

@@ -43,7 +43,9 @@ export const Register = () => {
             value={data.name}
             onChange={handleName}
           />
-          {errors.name && <span> {errors.name.message} </span>}
+          {errors.name && (
+            <C.InvalidError> {errors.name.message} </C.InvalidError>
+          )}
         </div>
 
         <div className="contentRegister">
@@ -54,7 +56,9 @@ export const Register = () => {
             value={data.email}
             onChange={handleEmail}
           />
-          {errors.email && <span> {errors.email.message} </span>}
+          {errors.email && (
+            <C.InvalidError> {errors.email.message} </C.InvalidError>
+          )}
         </div>
 
         <div className="contentPass">
@@ -66,10 +70,12 @@ export const Register = () => {
             onChange={handlePassword}
           />
 
-          <div className="hiden" onClick={() => setHidden(!hidden)}>
+          <div className="hidden" onClick={() => setHidden(!hidden)}>
             {!hidden ? <img src={Eye} /> : <img src={EyeSlash} />}
           </div>
-          {errors.password && <span> {errors.password.message} </span>}
+          {errors.password && (
+            <C.InvalidError> {errors.password.message} </C.InvalidError>
+          )}
         </div>
 
         <div className="contentPass">
@@ -80,11 +86,11 @@ export const Register = () => {
             value={data.confirmPassword}
             onChange={handleConfirmPassword}
           />
-          <div className="hiden" onClick={() => setHidden(!hidden)}>
+          <div className="hidden" onClick={() => setHidden(!hidden)}>
             {!hidden ? <img src={Eye} /> : <img src={EyeSlash} />}
           </div>
           {errors.confirmPassword && (
-            <span> {errors.confirmPassword.message} </span>
+            <C.InvalidError> {errors.confirmPassword.message} </C.InvalidError>
           )}
         </div>
         <C.Button type="submit">Register</C.Button>

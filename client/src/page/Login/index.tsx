@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Eye from "../../assets/icons/eye.svg";
 import EyeSlash from "../../assets/icons/eye-slash.svg";
@@ -11,7 +11,6 @@ import * as C from "./styles";
 export const Login = () => {
   const [hidden, setHidden] = useState(true);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const { setData, data, handleSubmit, loginUser, errors, register } =
     useRegister();
@@ -37,7 +36,9 @@ export const Login = () => {
             value={data.email}
             onChange={handleEmail}
           />
-          {errors.email && <span> {errors.email.message} </span>}
+          {errors.email && (
+            <C.InvalidError> {errors.email.message} </C.InvalidError>
+          )}
         </div>
         <div className="contentPass">
           <div className="contentLabel">
@@ -51,10 +52,12 @@ export const Login = () => {
             onChange={handlePassword}
           />
 
-          <div className="hiden" onClick={() => setHidden(!hidden)}>
+          <div className="hidden" onClick={() => setHidden(!hidden)}>
             {!hidden ? <img src={Eye} /> : <img src={EyeSlash} />}
           </div>
-          {errors.password && <span> {errors.password.message} </span>}
+          {errors.password && (
+            <C.InvalidError> {errors.password.message} </C.InvalidError>
+          )}
         </div>
         <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>
       </C.ContainerForm>

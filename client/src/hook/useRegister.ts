@@ -78,7 +78,8 @@ export const useRegister = () => {
     }
   };
 
-  const loginUser = async () => {
+  const loginUser = async (e: any) => {
+    e.preventDefault();
     const { email, password } = data;
 
     try {

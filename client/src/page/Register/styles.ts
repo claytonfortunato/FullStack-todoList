@@ -45,11 +45,6 @@ export const ContainerForm = styled.form`
       margin: 6px 0px;
       font-size: 14px;
     }
-
-    > span {
-      color: red;
-      font-size: 1.2rem;
-    }
   }
 
   .contentPass {
@@ -80,7 +75,7 @@ export const ContainerForm = styled.form`
       }
     }
 
-    .hiden {
+    .hidden {
       position: absolute;
       right: 0;
       top: 25px;
@@ -141,4 +136,9 @@ export const Button = styled.button`
   border-radius: 8px;
   cursor: pointer;
   margin-top: 2rem;
+`;
+
+export const InvalidError = styled.span`
+  color: red;
+  font-size: 1.2rem;
 `;
