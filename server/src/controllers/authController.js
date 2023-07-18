@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.json({
-        error: "No user found",
+        error: "Nenhum usuário encontrado!",
       });
     }
 
@@ -71,7 +71,7 @@ const loginUser = async (req, res) => {
 
       if (!match) {
         res.json({
-          error: "Passwords do not match",
+          error: "Senha ou email inválido",
         });
       }
     }
