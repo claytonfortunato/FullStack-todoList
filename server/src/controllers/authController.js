@@ -1,6 +1,7 @@
 const User = require("../models/usermod");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
+require("dotenv").config;
 
 const user = (req, res) => {
   res.json("teste is working");
@@ -12,20 +13,20 @@ const registerUser = async (req, res) => {
 
     if (!name) {
       return res.json({
-        error: "name is required",
+        error: "Nome é requerido",
       });
     }
 
     if (!password || password.length < 6) {
       return res.json({
-        error: "Password is required and must be at least 6 characters long",
+        error: "A senha é obrigatória e deve ter pelo menos 6 caracteres",
       });
     }
     //Check email
     const exist = await User.findOne({ email });
     if (exist) {
       return res.json({
-        error: "Email is taken already",
+        error: "Email já foi usado",
       });
     }
 
