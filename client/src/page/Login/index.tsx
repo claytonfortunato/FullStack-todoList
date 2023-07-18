@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Eye from "../../assets/icons/eye.svg";
 import EyeSlash from "../../assets/icons/eye-slash.svg";
@@ -7,13 +8,25 @@ import EyeSlash from "../../assets/icons/eye-slash.svg";
 import { useRegister } from "../../hook/useRegister";
 
 import * as C from "./styles";
+import { api } from "../../services/api";
+import { toast } from "react-hot-toast";
+
+interface LoginProps {
+  email: string;
+  password: string;
+}
 
 export const Login = () => {
   const [hidden, setHidden] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<LoginProps>({
+    email: "",
+    password: "",
+  });
 
-  const { setData, data, handleSubmit, loginUser, errors, register } =
-    useRegister();
+  const navigate = useNavigate();
+
+  const { handleSubmit, errors, register } = useRegister();
 
   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, password: e.target.value });
@@ -21,6 +34,25 @@ export const Login = () => {
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, email: e.target.value });
+  };
+
+  const loginUser = async () => {
+    const { email, password } = data;
+    try {
+      const { data } = await api.post("/login", {
+        email,
+        password,
+      });
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        setData({});
+        navigate("/todo");
+        toast.success("Login Successful");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -34,7 +66,7 @@ export const Login = () => {
             type="text"
             {...register("email")}
             value={data.email}
-            onChange={handleEmail}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
           />
           {errors.email && (
             <C.InvalidError> {errors.email.message} </C.InvalidError>
@@ -49,7 +81,7 @@ export const Login = () => {
             type={!hidden ? "text" : "password"}
             {...register("password")}
             value={data.password}
-            onChange={handlePassword}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
           />
 
           <div className="hidden" onClick={() => setHidden(!hidden)}>
@@ -59,7 +91,9 @@ export const Login = () => {
             <C.InvalidError> {errors.password.message} </C.InvalidError>
           )}
         </div>
-        <C.Button type="submit">{loading ? "Loading..." : "Log In"}</C.Button>
+        <C.Button type="submit" onClick={loginUser}>
+          Log In
+        </C.Button>
       </C.ContainerForm>
       <C.Action>
         <p>Você não possui conta?</p>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-hot-toast";
@@ -46,18 +46,14 @@ export const useRegister = () => {
     resolver: zodResolver(createUserFormSchema),
   });
 
-  // const loginForm = useForm<LoginFormData>({
-  //   resolver: zodResolver(createUserFormSchema),
-  // });
-
-  const navigate = useNavigate();
-
   const [data, setData] = useState<RegisterProps>({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   const registerUser = async () => {
     const { name, email, password } = data;
@@ -78,23 +74,25 @@ export const useRegister = () => {
     }
   };
 
-  const loginUser = async (e: any) => {
-    e.preventDefault();
-    const { email, password } = data;
+  // const loginUser = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const { data } = await api.post("/login", {
-        email,
-        password,
-      });
-      if (data.error) {
-        toast.error(data.error);
-      } else {
-        setData({});
-        navigate("/todo");
-      }
-    } catch (error) {}
-  };
+  //   const { email, password } = data;
+
+  //   try {
+  //     const { data } = await axios.post("http://localhost:8000/login", {
+  //       email,
+  //       password,
+  //     });
+  //     if (data.error) {
+  //       toast.error(data.error);
+  //     } else {
+  //       setData({});
+  //       navigate("/todo");
+  //       toast.success("Welcome,Todo List!");
+  //     }
+  //   } catch (error) {}
+  // };
 
   return {
     setData,
@@ -102,7 +100,6 @@ export const useRegister = () => {
     register,
     handleSubmit,
     registerUser,
-    loginUser,
     errors,
   };
 };
