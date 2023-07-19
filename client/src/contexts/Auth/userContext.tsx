@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { api } from "../../services/api";
+// import { api } from "../../services/api";
+import axios from "axios";
 
 import { AuthProvider } from "../../interfaces/types";
 
@@ -11,11 +12,11 @@ export type User = {
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }: AuthProvider) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (!user) {
-      api.get("/profile").then(({ data }) => {
+      axios.get("/profile").then(({ data }) => {
         setUser(data);
       });
     }

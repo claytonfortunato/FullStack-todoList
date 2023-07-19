@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -25,7 +25,9 @@ export const Login = () => {
 
   const { handleSubmit, errors, register } = useRegister();
 
-  const loginUser = async () => {
+  const loginUser = async (e: FormEvent) => {
+    e.preventDefault();
+
     const { email, password } = data;
     try {
       const { data } = await api.post("/login", {

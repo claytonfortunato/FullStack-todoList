@@ -68,7 +68,6 @@ const loginUser = async (req, res) => {
           res.cookie("token", token).json(user);
         }
       );
-
       if (!match) {
         res.json({
           error: "Senha ou email inválido",
