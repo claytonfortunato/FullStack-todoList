@@ -1,24 +1,28 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect } from "react";
 import { api } from "../../services/api";
-import axios from "axios";
 
 import { AuthProvider } from "../../interfaces/types";
+
+export type User = {
+  name: string;
+  email: string;
+};
 
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }: AuthProvider) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (!user) {
-      axios.get("/profile").then(({ data }) => {
+      api.get("/profile").then(({ data }) => {
         setUser(data);
       });
     }
   }, []);
 
   return (
-    <UserContext.Provider value={(user, setUser)}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -7,18 +7,15 @@ import EyeSlash from "../../assets/icons/eye-slash.svg";
 
 import { useRegister } from "../../hook/useRegister";
 
-import * as C from "./styles";
 import { api } from "../../services/api";
 import { toast } from "react-hot-toast";
+import { LoginProps } from "../../interfaces/types";
 
-interface LoginProps {
-  email: string;
-  password: string;
-}
+import * as C from "./styles";
 
 export const Login = () => {
   const [hidden, setHidden] = useState(true);
-  const [loading, setLoading] = useState(false);
+
   const [data, setData] = useState<LoginProps>({
     email: "",
     password: "",
@@ -27,14 +24,6 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const { handleSubmit, errors, register } = useRegister();
-
-  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, password: e.target.value });
-  };
-
-  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, email: e.target.value });
-  };
 
   const loginUser = async () => {
     const { email, password } = data;

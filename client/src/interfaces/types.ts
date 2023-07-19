@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Item {
   id: string;
   title: string;
@@ -16,6 +18,11 @@ export interface RegisterProps {
   confirmPassword: string;
 }
 
+export interface LoginProps {
+  email: string;
+  password: string;
+}
+
 export interface AuthProvider {
-  children: JSX.Element;
+  children: ReactNode;
 }

@@ -1,5 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
-import { UserContext } from "../../contexts/Auth/userContext";
+import { FormEvent, useState } from "react";
 
 import { v4 } from "uuid";
 
@@ -12,6 +11,7 @@ import { toast } from "react-hot-toast";
 import { Item } from "../../interfaces/types";
 
 import * as C from "./styles";
+import { Header } from "../../components/Header";
 
 export const TodoList = () => {
   const [list, setList] = useState<Item[]>([]);
@@ -19,8 +19,6 @@ export const TodoList = () => {
   const [filter, setFilter] = useState<"all" | "toDo" | "complete">("all");
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
-
-  const { user } = useContext(UserContext);
 
   const handleTodo = (id: string) => {
     setList((prev) => {
@@ -98,7 +96,7 @@ export const TodoList = () => {
   return (
     <>
       <C.Container>
-        {!!user && <h2>H1 {user.name}</h2>}
+        <Header />
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
           <TaskInput
