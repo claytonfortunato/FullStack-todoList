@@ -64,9 +64,8 @@ export const TodoList = () => {
           return el;
         })
       );
+      toast.success("Tarefa adicionada!");
       setToogleSubmit(true);
-
-      setDescription("");
 
       setIsEditItem(null);
     } else {
@@ -78,7 +77,9 @@ export const TodoList = () => {
           done: false,
         },
       ]);
+      localStorage.setItem("todo", JSON.stringify(list));
     }
+    setDescription("");
   };
 
   const handleDeleteTask = (id: string) => {

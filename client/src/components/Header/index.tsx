@@ -1,8 +1,17 @@
 import { useContext } from "react";
 import { UserContext } from "../../contexts/Auth/userContext";
 
-export const Header = () => {
-  const { user } = useContext(UserContext);
+import Logout from "../../assets/icons/sign-out.svg";
 
-  return <div>{!!user && <h1>Hi {user.name}</h1>}</div>;
+import * as C from "./styles";
+
+export const Header = () => {
+  const { user } = useContext<any>(UserContext);
+
+  return (
+    <C.Container>
+      {!!user && <h1>Olá, {user.name}</h1>}
+      <img src={Logout} alt="" />
+    </C.Container>
+  );
 };

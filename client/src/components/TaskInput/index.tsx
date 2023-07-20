@@ -4,7 +4,6 @@ import * as C from "./styles";
 
 interface PropsInput {
   addTask: (e: FormEvent) => void;
-
   description: string;
   inputText: (e: string) => void;
   toggle: boolean;
