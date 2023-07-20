@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 
 import { v4 } from "uuid";
 
@@ -13,8 +13,19 @@ import { Item } from "../../interfaces/types";
 import * as C from "./styles";
 import { Header } from "../../components/Header";
 
+const getLocalStorage = () => {
+  let data = localStorage.getItem("todos");
+  console.log(data);
+
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return [];
+  }
+};
+
 export const TodoList = () => {
-  const [list, setList] = useState<Item[]>([]);
+  const [list, setList] = useState<Item[]>(getLocalStorage());
   const [description, setDescription] = useState<string>("");
   const [filter, setFilter] = useState<"all" | "toDo" | "complete">("all");
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
@@ -69,15 +80,18 @@ export const TodoList = () => {
 
       setIsEditItem(null);
     } else {
-      setList((prev) => [
-        ...prev,
-        {
-          id: v4(),
-          title: description,
-          done: false,
-        },
-      ]);
-      localStorage.setItem("todo", JSON.stringify(list));
+      setList((prev: Item[]) => {
+        const newTodos: Item[] = [
+          {
+            id: v4(),
+            title: description,
+            done: false,
+          },
+          ...prev,
+        ];
+
+        return newTodos;
+      });
     }
     setDescription("");
   };
@@ -93,6 +107,10 @@ export const TodoList = () => {
 
     if (filter === "complete") return list.filter((todo) => todo.done === true);
   };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(list));
+  }, [list]);
 
   return (
     <>
