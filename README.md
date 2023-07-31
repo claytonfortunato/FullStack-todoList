@@ -23,6 +23,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Express
 - Styled-components
 - Axios
+- Hook Form
 - React-Router-Dom
 - React-hot-toast
 - ContextAPI
