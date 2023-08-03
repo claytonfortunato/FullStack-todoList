@@ -6,11 +6,11 @@ import Logout from "../../assets/icons/sign-out.svg";
 import * as C from "./styles";
 
 export const Header = () => {
-  const { user } = useContext<any>(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <C.Container>
-      {!!user && <h1>Olá, {user.name}</h1>}
+      {!!user && <h2>{user.name}</h2>}
       <img src={Logout} alt="" />
     </C.Container>
   );

@@ -1,21 +1,21 @@
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useContext } from "react";
+import { UserContext } from "../../contexts/Auth/userContext";
 
 import { v4 } from "uuid";
 
 import { Task } from "../../components/Task";
 import { TaskInput } from "../../components/TaskInput";
 import { FilterTask } from "../../components/FilterTask";
+import { Header } from "../../components/Header";
 
 import { toast } from "react-hot-toast";
 
 import { Item } from "../../interfaces/types";
 
 import * as C from "./styles";
-import { Header } from "../../components/Header";
 
 const getLocalStorage = () => {
   let data = localStorage.getItem("todos");
-  console.log(data);
 
   if (data) {
     return JSON.parse(data);
@@ -31,12 +31,16 @@ export const TodoList = () => {
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
+  const { user } = useContext(UserContext);
+  console.log(user);
+
   const handleTodo = (id: string) => {
     setList((prev) => {
       const newValue = prev.map((todo) => {
         if (todo.id === id) {
           return { ...todo, done: !todo.done };
         }
+
         return todo;
       });
 
@@ -75,10 +79,10 @@ export const TodoList = () => {
           return el;
         })
       );
-      toast.success("Tarefa adicionada!");
       setToogleSubmit(true);
 
       setIsEditItem(null);
+      toast.success("Tarefa editada");
     } else {
       setList((prev: Item[]) => {
         const newTodos: Item[] = [
@@ -92,6 +96,7 @@ export const TodoList = () => {
 
         return newTodos;
       });
+      toast.success("Tarefa adicionada!");
     }
     setDescription("");
   };
@@ -116,6 +121,8 @@ export const TodoList = () => {
     <>
       <C.Container>
         <Header />
+
+        {!!user && <h2>Hi {user.name}</h2>}
         <C.Header>O que você tem que fazer hoje?</C.Header>
         <C.Wrapper>
           <TaskInput

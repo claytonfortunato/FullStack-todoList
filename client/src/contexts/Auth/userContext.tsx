@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from "react";
-// import { api } from "../../services/api";
+import { api } from "../../services/api";
+
 import axios from "axios";
 
 import { AuthProvider } from "../../interfaces/types";
 
 export type User = {
   name: string;
-  email: string;
 };
 
 export const UserContext = createContext({});
