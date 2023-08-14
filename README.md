@@ -12,6 +12,13 @@
 
 
 
+Video:
+
+https://github.com/claytonfortunato/FullStack-todoList/assets/104373308/b4c6a9f5-7d16-4198-8d37-d6cb94245e91
+
+
+
+
 
 ## 🚀 Tecnologias
 
