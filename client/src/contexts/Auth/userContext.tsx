@@ -7,16 +7,17 @@ import { AuthProvider } from "../../interfaces/types";
 
 export type User = {
   name: string;
+  email: string;
 };
 
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }: AuthProvider) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (!user) {
-      axios.get("/profile").then(({ data }) => {
+      api.get("/profile").then(({ data }) => {
         setUser(data);
       });
     }

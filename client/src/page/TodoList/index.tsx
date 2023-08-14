@@ -14,6 +14,8 @@ import { Item } from "../../interfaces/types";
 
 import * as C from "./styles";
 
+type Filter = "all" | "toDo" | "complete";
+
 const getLocalStorage = () => {
   let data = localStorage.getItem("todos");
 
@@ -27,12 +29,11 @@ const getLocalStorage = () => {
 export const TodoList = () => {
   const [list, setList] = useState<Item[]>(getLocalStorage());
   const [description, setDescription] = useState<string>("");
-  const [filter, setFilter] = useState<"all" | "toDo" | "complete">("all");
+  const [filter, setFilter] = useState<Filter>("all");
   const [toggleSubmit, setToogleSubmit] = useState<boolean>(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
   const { user } = useContext(UserContext);
-  console.log(user);
 
   const handleTodo = (id: string) => {
     setList((prev) => {
